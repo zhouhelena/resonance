@@ -20,13 +20,16 @@ import { useState } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 
 export default function Home() {
-  const [sliderValue, setSliderValue] = useState(50);
+  const [ethValue, setEthValue] = useState(0);
+  const [polygonValue, setPolygonValue] = useState(0);
+  const [aptosValue, setAptosValue] = useState(0);
+  const [arbitrumValue, setArbitrumValue] = useState(0);
 
-  const labelStyles = {
-    mt: "2",
-    ml: "-2.5",
-    fontSize: "sm",
-  };
+  const totalSum =
+    Number(ethValue) +
+    Number(polygonValue) +
+    Number(aptosValue) +
+    Number(arbitrumValue);
 
   return (
     <ChakraProvider>
@@ -107,6 +110,9 @@ export default function Home() {
                       outline: "none",
                       boxShadow: "none",
                     }}
+                    // isReadOnly
+                    disabled={true}
+                    value={totalSum.toFixed(2)}
                     type="number"
                   />
                 </Box>
@@ -165,6 +171,8 @@ export default function Home() {
                       outline: "none",
                       boxShadow: "none",
                     }}
+                    value={ethValue}
+                    onChange={(e) => setEthValue(e.target.value)}
                     type="number"
                   />
                 </Box>
@@ -205,6 +213,8 @@ export default function Home() {
                       outline: "none",
                       boxShadow: "none",
                     }}
+                    value={polygonValue}
+                    onChange={(e) => setPolygonValue(e.target.value)}
                     type="number"
                   />
                 </Box>
@@ -245,6 +255,8 @@ export default function Home() {
                       outline: "none",
                       boxShadow: "none",
                     }}
+                    value={aptosValue}
+                    onChange={(e) => setAptosValue(e.target.value)}
                     type="number"
                   />
                 </Box>
@@ -285,12 +297,14 @@ export default function Home() {
                       outline: "none",
                       boxShadow: "none",
                     }}
+                    value={arbitrumValue}
+                    onChange={(e) => setArbitrumValue(e.target.value)}
                     type="number"
                   />
                 </Box>
               </Flex>
 
-              <Box p={4} pt={6} w="full">
+              {/* <Box p={4} pt={6} w="full">
                 <Slider
                   aria-label="slider-ex-6"
                   onChange={(val) => setSliderValue(val)}
@@ -320,7 +334,7 @@ export default function Home() {
                   </SliderTrack>
                   <SliderThumb />
                 </Slider>
-              </Box>
+              </Box> */}
 
               <Box mt="0.5rem">
                 <Button
