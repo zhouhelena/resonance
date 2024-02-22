@@ -344,6 +344,7 @@ export default function Home() {
                   p="1.62rem"
                   borderRadius="1.25rem"
                   _hover={{ bg: "rgb(251, 211, 225)" }}
+                  onClick={""}
                 >
                   Invest
                 </Button>

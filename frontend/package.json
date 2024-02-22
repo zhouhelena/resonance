@@ -12,6 +12,7 @@
     "@emotion/styled": "^11.11.0",
     "@tanstack/react-query": "^5.22.2",
     "@walletconnect/modal": "^2.6.2",
+    "chart.js": "^4.4.1",
     "framer-motion": "^11.0.5",
     "next": "latest",
     "react": "18.2.0",
