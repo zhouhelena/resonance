@@ -26,6 +26,12 @@ export default function Home() {
   const [aptosValue, setAptosValue] = useState("");
   const [arbitrumValue, setArbitrumValue] = useState("");
   const [totalValue, setTotalValue] = useState("");
+  const [sliderValues, setSliderValues] = useState({
+    ethereum: 70,
+    polygon: 10,
+    aptos: 10,
+    arbitrum: 10,
+  });
 
   const router = useRouter();
 
@@ -38,6 +44,57 @@ export default function Home() {
     Number(polygonValue) +
     Number(aptosValue) +
     Number(arbitrumValue);
+
+  const handleSliderChange = (coin, value) => {
+    const totalOtherCoins = 100 - value;
+    const numOtherCoins = 3;
+    const otherCoinValue = totalOtherCoins / numOtherCoins;
+
+    setSliderValues((prevValues) => ({
+      ...prevValues,
+      [coin]: value,
+      ...(coin !== "ethereum" && { ethereum: otherCoinValue }),
+      ...(coin !== "polygon" && { polygon: otherCoinValue }),
+      ...(coin !== "aptos" && { aptos: otherCoinValue }),
+      ...(coin !== "arbitrum" && { arbitrum: otherCoinValue }),
+    }));
+  };
+
+  const renderSlider = (coin, label) => (
+    <Flex alignItems="center" justifyContent="space-between" mt="4">
+      <Box minWidth="100" mr={4}>
+        <Button bg="rgb(232, 0, 111)" color="white" borderRadius="1.12rem">
+          {label}
+        </Button>
+      </Box>
+      <Box flex="1">
+        <Slider
+          aria-label={`${label}-slider`}
+          value={sliderValues[coin]}
+          min={0}
+          max={100}
+          onChange={(val) => handleSliderChange(coin, val)}
+        >
+          <SliderTrack>
+            <SliderFilledTrack bg="pink.200" />
+          </SliderTrack>
+          <SliderThumb />
+          <SliderMark
+            value={sliderValues[coin]}
+            bg="pink.200"
+            color="white"
+            textAlign="center"
+            mt="-10"
+            ml="-5"
+            w="10"
+            borderRadius="0.5rem"
+          >
+            {sliderValues[coin]}%
+          </SliderMark>
+        </Slider>
+      </Box>
+    </Flex>
+  );
 
   return (
     <ChakraProvider>
@@ -83,8 +140,7 @@ export default function Home() {
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    {" "}
-                    // Tab 1
+                    {/* Tab 1 */}
                     <Flex
                       alignItems="center"
                       justifyContent="space-between"
@@ -139,6 +195,7 @@ export default function Home() {
                         />
                       </Box>
                     </Flex>
+
                     <Flex
                       alignItems="center"
                       justifyContent="space-between"
@@ -198,6 +255,7 @@ export default function Home() {
                         />
                       </Box>
                     </Flex>
+
                     <Flex
                       alignItems="center"
                       justifyContent="space-between"
@@ -239,6 +297,7 @@ export default function Home() {
                         />
                       </Box>
                     </Flex>
+
                     <Flex
                       alignItems="center"
                       justifyContent="space-between"
@@ -280,6 +339,7 @@ export default function Home() {
                         />
                       </Box>
                     </Flex>
+
                     <Flex
                       alignItems="center"
                       justifyContent="space-between"
@@ -323,6 +383,7 @@ export default function Home() {
                     </Flex>
                   </TabPanel>
                   <TabPanel>
+                    {/* Tab 2 */}
                     <p>
                       <Flex
                         alignItems="center"
@@ -388,184 +449,17 @@ export default function Home() {
                         mt="0.25rem"
                         border="0.06rem solid rgb(237, 238, 242)"
                       >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Ethereum
-                          </Button>
-                        </Box>
-                        <Flex
-                          alignItems="center"
-                          justifyContent="center"
-                          bg="white"
-                          p="0.18rem"
-                          borderRadius="0.75rem"
-                          pos="relative"
-                          top="-2.37rem"
-                          left="2.5rem"
-                        >
-                          <ArrowDownIcon
-                            bg="rgb(247, 248, 250)"
-                            color="rgb(128,128,128)"
-                            h="1.5rem"
-                            width="1.62rem"
-                            borderRadius="0.75rem"
-                          />
-                        </Flex>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={ethValue}
-                            onChange={(e) => setEthValue(e.target.value)}
-                            type="number"
-                          />
-                        </Box>
-                      </Flex>
-
-                      <Flex
-                        alignItems="center"
-                        justifyContent="space-between"
-                        bg="rgb(247, 248, 250)"
-                        pos="relative"
-                        p="1rem 1rem 1.7rem"
-                        borderRadius="1.25rem"
-                        mt="0.25rem"
-                        border="0.06rem solid rgb(237, 238, 242)"
-                      >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Polygon
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={polygonValue}
-                            onChange={(e) => setPolygonValue(e.target.value)}
-                            type="number"
-                          />
-                        </Box>
-                      </Flex>
-
-                      <Flex
-                        alignItems="center"
-                        justifyContent="space-between"
-                        bg="rgb(247, 248, 250)"
-                        pos="relative"
-                        p="1rem 1rem 1.7rem"
-                        borderRadius="1.25rem"
-                        mt="0.25rem"
-                        border="0.06rem solid rgb(237, 238, 242)"
-                      >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Aptos
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={aptosValue}
-                            onChange={(e) => setAptosValue(e.target.value)}
-                            type="number"
-                          />
-                        </Box>
-                      </Flex>
-
-                      <Flex
-                        alignItems="center"
-                        justifyContent="space-between"
-                        bg="rgb(247, 248, 250)"
-                        pos="relative"
-                        p="1rem 1rem 1.7rem"
-                        borderRadius="1.25rem"
-                        mt="0.25rem"
-                        border="0.06rem solid rgb(237, 238, 242)"
-                      >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Arbitrum
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={arbitrumValue}
-                            onChange={(e) => setArbitrumValue(e.target.value)}
-                            type="number"
-                          />
+                        <Box w="full">
+                          {renderSlider("ethereum", "Ethereum")}
+                          {renderSlider("polygon", "Polygon")}
+                          {renderSlider("aptos", "Aptos")}
+                          {renderSlider("arbitrum", "Arbitrum")}
                         </Box>
                       </Flex>
                     </p>
                   </TabPanel>
                   <TabPanel>
+                    {/* Tab 3 */}
                     <p>
                       <Flex
                         alignItems="center"
@@ -631,184 +525,17 @@ export default function Home() {
                         mt="0.25rem"
                         border="0.06rem solid rgb(237, 238, 242)"
                       >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Ethereum
-                          </Button>
-                        </Box>
-                        <Flex
-                          alignItems="center"
-                          justifyContent="center"
-                          bg="white"
-                          p="0.18rem"
-                          borderRadius="0.75rem"
-                          pos="relative"
-                          top="-2.37rem"
-                          left="2.5rem"
-                        >
-                          <ArrowDownIcon
-                            bg="rgb(247, 248, 250)"
-                            color="rgb(128,128,128)"
-                            h="1.5rem"
-                            width="1.62rem"
-                            borderRadius="0.75rem"
-                          />
-                        </Flex>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={ethValue}
-                            onChange={(e) => setEthValue(e.target.value)}
-                            type="number"
-                          />
-                        </Box>
-                      </Flex>
-
-                      <Flex
-                        alignItems="center"
-                        justifyContent="space-between"
-                        bg="rgb(247, 248, 250)"
-                        pos="relative"
-                        p="1rem 1rem 1.7rem"
-                        borderRadius="1.25rem"
-                        mt="0.25rem"
-                        border="0.06rem solid rgb(237, 238, 242)"
-                      >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Polygon
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={polygonValue}
-                            onChange={(e) => setPolygonValue(e.target.value)}
-                            type="number"
-                          />
-                        </Box>
-                      </Flex>
-
-                      <Flex
-                        alignItems="center"
-                        justifyContent="space-between"
-                        bg="rgb(247, 248, 250)"
-                        pos="relative"
-                        p="1rem 1rem 1.7rem"
-                        borderRadius="1.25rem"
-                        mt="0.25rem"
-                        border="0.06rem solid rgb(237, 238, 242)"
-                      >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Aptos
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={aptosValue}
-                            onChange={(e) => setAptosValue(e.target.value)}
-                            type="number"
-                          />
-                        </Box>
-                      </Flex>
-
-                      <Flex
-                        alignItems="center"
-                        justifyContent="space-between"
-                        bg="rgb(247, 248, 250)"
-                        pos="relative"
-                        p="1rem 1rem 1.7rem"
-                        borderRadius="1.25rem"
-                        mt="0.25rem"
-                        border="0.06rem solid rgb(237, 238, 242)"
-                      >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Arbitrum
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={arbitrumValue}
-                            onChange={(e) => setArbitrumValue(e.target.value)}
-                            type="number"
-                          />
+                        <Box w="full">
+                          {renderSlider("ethereum", "Ethereum")}
+                          {renderSlider("polygon", "Polygon")}
+                          {renderSlider("aptos", "Aptos")}
+                          {renderSlider("arbitrum", "Arbitrum")}
                         </Box>
                       </Flex>
                     </p>
                   </TabPanel>
                   <TabPanel>
+                    {/* Tab 4 */}
                     <p>
                       <Flex
                         alignItems="center"
@@ -874,217 +601,17 @@ export default function Home() {
                         mt="0.25rem"
                         border="0.06rem solid rgb(237, 238, 242)"
                       >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Ethereum
-                          </Button>
-                        </Box>
-                        <Flex
-                          alignItems="center"
-                          justifyContent="center"
-                          bg="white"
-                          p="0.18rem"
-                          borderRadius="0.75rem"
-                          pos="relative"
-                          top="-2.37rem"
-                          left="2.5rem"
-                        >
-                          <ArrowDownIcon
-                            bg="rgb(247, 248, 250)"
-                            color="rgb(128,128,128)"
-                            h="1.5rem"
-                            width="1.62rem"
-                            borderRadius="0.75rem"
-                          />
-                        </Flex>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={ethValue}
-                            onChange={(e) => setEthValue(e.target.value)}
-                            type="number"
-                          />
-                        </Box>
-                      </Flex>
-
-                      <Flex
-                        alignItems="center"
-                        justifyContent="space-between"
-                        bg="rgb(247, 248, 250)"
-                        pos="relative"
-                        p="1rem 1rem 1.7rem"
-                        borderRadius="1.25rem"
-                        mt="0.25rem"
-                        border="0.06rem solid rgb(237, 238, 242)"
-                      >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Polygon
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={polygonValue}
-                            onChange={(e) => setPolygonValue(e.target.value)}
-                            type="number"
-                          />
-                        </Box>
-                      </Flex>
-
-                      <Flex
-                        alignItems="center"
-                        justifyContent="space-between"
-                        bg="rgb(247, 248, 250)"
-                        pos="relative"
-                        p="1rem 1rem 1.7rem"
-                        borderRadius="1.25rem"
-                        mt="0.25rem"
-                        border="0.06rem solid rgb(237, 238, 242)"
-                      >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Aptos
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={aptosValue}
-                            onChange={(e) => setAptosValue(e.target.value)}
-                            type="number"
-                          />
-                        </Box>
-                      </Flex>
-
-                      <Flex
-                        alignItems="center"
-                        justifyContent="space-between"
-                        bg="rgb(247, 248, 250)"
-                        pos="relative"
-                        p="1rem 1rem 1.7rem"
-                        borderRadius="1.25rem"
-                        mt="0.25rem"
-                        border="0.06rem solid rgb(237, 238, 242)"
-                      >
-                        <Box>
-                          <Button
-                            bg="rgb(232, 0, 111)"
-                            color="white"
-                            p="0rem 1rem"
-                            borderRadius="1.12rem"
-                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                          >
-                            Arbitrum
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Input
-                            placeholder="0.0"
-                            fontSize="1.5rem"
-                            width="100%"
-                            size="19rem"
-                            textAlign="right"
-                            bg="rgb(247, 248, 250)"
-                            outline="none"
-                            border="none"
-                            _focus={{
-                              outline: "none",
-                              boxShadow: "none",
-                            }}
-                            value={arbitrumValue}
-                            onChange={(e) => setArbitrumValue(e.target.value)}
-                            type="number"
-                          />
+                        <Box w="full">
+                          {renderSlider("ethereum", "Ethereum")}
+                          {renderSlider("polygon", "Polygon")}
+                          {renderSlider("aptos", "Aptos")}
+                          {renderSlider("arbitrum", "Arbitrum")}
                         </Box>
                       </Flex>
                     </p>
                   </TabPanel>
                 </TabPanels>
               </Tabs>
-
-              {/* <Box p={4} pt={6} w="full">
-                <Slider
-                  aria-label="slider-ex-6"
-                  onChange={(val) => setSliderValue(val)}
-                >
-                  <SliderMark value={25} {...labelStyles}>
-                    25%
-                  </SliderMark>
-                  <SliderMark value={50} {...labelStyles}>
-                    50%
-                  </SliderMark>
-                  <SliderMark value={75} {...labelStyles}>
-                    75%
-                  </SliderMark>
-                  <SliderMark
-                    value={sliderValue}
-                    textAlign="center"
-                    bg="blue.500"
-                    color="white"
-                    mt="-10"
-                    ml="-5"
-                    w="12"
-                  >
-                    {sliderValue}%
-                  </SliderMark>
-                  <SliderTrack>
-                    <SliderFilledTrack />
-                  </SliderTrack>
-                  <SliderThumb />
-                </Slider>
-              </Box> */}
 
               <Box mt="0.5rem">
                 <Button
