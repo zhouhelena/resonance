@@ -19,6 +19,7 @@ import { useState } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { useSendTransaction } from "wagmi";
 
 export default function Home() {
   const [ethValue, setEthValue] = useState("");
@@ -27,6 +28,8 @@ export default function Home() {
   const [arbitrumValue, setArbitrumValue] = useState("");
   const [totalValue, setTotalValue] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
+
+  const {data:hash, writeContract} = useWriteContract();
 
   const tabSliderValues = [
     {}, // Custom
@@ -48,6 +51,7 @@ export default function Home() {
       };
 
       // TODO: Send to backend
+
     }
 
     if (tabIndex == 1) {

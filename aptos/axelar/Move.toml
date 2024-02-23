@@ -1,0 +1,9 @@
+[package]
+name = "AptosReceiver"
+version = "0.0.1"
+
+[addresses]
+my_account = "0xe9d8eecaf7511cbd8c2759ae92504c0207c367be0bd1f9dd13b6a2afd45d0ef0"
+
+[dependencies]
+AxelarFramework = {  git = "https://github.com/axelarnetwork/axelar-cgp-aptos.git", subdir ="aptos/modules/axelar", rev = "main" }

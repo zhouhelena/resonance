@@ -125,6 +125,7 @@ module liquidswap::liquidity_pool {
 
         curves::assert_valid_curve<Curve>();
         assert!(!exists<LiquidityPool<X, Y, Curve>>(@liquidswap_pool_account), ERR_POOL_EXISTS_FOR_PAIR);
+        assert!(exists<PoolAccountCapability>(@liquidswap), ERR_NOT_ENOUGH_PERMISSIONS_TO_INITIALIZE);
 
         let pool_cap = borrow_global<PoolAccountCapability>(@liquidswap);
         let pool_account = account::create_signer_with_capability(&pool_cap.signer_cap);
@@ -139,6 +140,7 @@ module liquidswap::liquidity_pool {
                 true
             );
         coin::destroy_freeze_cap(lp_freeze_cap);
+
 
         let x_scale = 0;
         let y_scale = 0;

@@ -1,0 +1,64 @@
+---
+compiled_package_info:
+  package_name: LiquidswapRouterV2
+  address_alias_instantiation:
+    Extensions: "0000000000000000000000000000000000000000000000000000000000000001"
+    aptos_framework: "0000000000000000000000000000000000000000000000000000000000000001"
+    aptos_std: "0000000000000000000000000000000000000000000000000000000000000001"
+    aptos_token: "0000000000000000000000000000000000000000000000000000000000000003"
+    core_resources: 000000000000000000000000000000000000000000000000000000000a550c18
+    dao_admin: e9d8eecaf7511cbd8c2759ae92504c0207c367be0bd1f9dd13b6a2afd45d0ef0
+    emergency_admin: e9d8eecaf7511cbd8c2759ae92504c0207c367be0bd1f9dd13b6a2afd45d0ef0
+    fee_admin: e9d8eecaf7511cbd8c2759ae92504c0207c367be0bd1f9dd13b6a2afd45d0ef0
+    liquidswap: e9d8eecaf7511cbd8c2759ae92504c0207c367be0bd1f9dd13b6a2afd45d0ef0
+    liquidswap_emergency_account: e9d8eecaf7511cbd8c2759ae92504c0207c367be0bd1f9dd13b6a2afd45d0ef0
+    liquidswap_lp: e9d8eecaf7511cbd8c2759ae92504c0207c367be0bd1f9dd13b6a2afd45d0ef0
+    liquidswap_pool_account: e9d8eecaf7511cbd8c2759ae92504c0207c367be0bd1f9dd13b6a2afd45d0ef0
+    std: "0000000000000000000000000000000000000000000000000000000000000001"
+    test_coin_admin: "0000000000000000000000000000000000000000000000000000000000000011"
+    test_helpers: "0000000000000000000000000000000000000000000000000000000000000012"
+    test_lp_owner: "0000000000000000000000000000000000000000000000000000000000000012"
+    test_pool_addr: 2540b6f8a87ac1cff2de9f5f742854b448cd4521e96f840eda05e63e4e944ed6
+    u256: 42f50b4ebbc56c902e91ef8de40cf191dc69fe9ada6cf4bb4ae6466a11486d7f
+    uq64x64: 42f50b4ebbc56c902e91ef8de40cf191dc69fe9ada6cf4bb4ae6466a11486d7f
+    vm_reserved: "0000000000000000000000000000000000000000000000000000000000000000"
+  source_digest: E2DEDB772FC4061851A5B1D7BC1FAB9F504650C04E228CF42A713BD6AF261809
+  build_flags:
+    dev_mode: false
+    test_mode: false
+    generate_docs: false
+    generate_abis: false
+    generate_move_model: true
+    full_model_generation: false
+    install_dir: ~
+    force_recompilation: false
+    additional_named_addresses: {}
+    architecture: ~
+    fetch_deps_only: false
+    skip_fetch_latest_git_deps: false
+    compiler_config:
+      bytecode_version: ~
+      known_attributes:
+        - bytecode_instruction
+        - deprecated
+        - event
+        - expected_failure
+        - legacy_entry_fun
+        - native_interface
+        - resource_group
+        - resource_group_member
+        - test
+        - test_only
+        - verify_only
+        - view
+      skip_attribute_checks: false
+      compiler_version: ~
+dependencies:
+  - AptosFramework
+  - AptosStdlib
+  - Liquidswap
+  - LiquidswapInit
+  - LiquidswapLP
+  - MoveStdlib
+  - U256
+  - UQ64x64

@@ -2,8 +2,8 @@
 compiled_package_info:
   package_name: LiquidswapLP
   address_alias_instantiation:
-    liquidswap_lp: 4d0e1c9969de6ff8d7d7518609bc207d7039d01dfd53cb9503d9de85683b1dce
-  source_digest: 5FB1CF42A6FECE1164279D646ABA79786BF8A924F3141C8E4CA783DBF8B4F267
+    liquidswap_lp: e9d8eecaf7511cbd8c2759ae92504c0207c367be0bd1f9dd13b6a2afd45d0ef0
+  source_digest: BF155B594AAFF6EE2584CA74E197942330F63CA674014EAF3495FF6BBFE976D9
   build_flags:
     dev_mode: false
     test_mode: false
