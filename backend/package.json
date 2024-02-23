@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aptos-labs/ts-sdk": "^1.7.0",
     "@chainlink/contracts": "^0.8.0",
     "@chainlink/contracts-ccip": "1.4.0",
     "@openzeppelin/contracts": "^5.0.1",
@@ -31,7 +32,7 @@
     "ethers": "^6.4.0",
     "hardhat-gas-reporter": "^1.0.8",
     "solidity-coverage": "^0.8.0",
-    "ts-node": ">=8.0.0",
+    "ts-node": "^10.9.2",
     "typechain": "^8.3.0",
     "typescript": ">=4.5.0"
   }

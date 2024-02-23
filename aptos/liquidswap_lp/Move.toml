@@ -1,0 +1,12 @@
+[package]
+name = 'LiquidswapLP'
+version = '1.0.0'
+upgrade_policy = "immutable"
+
+[addresses]
+liquidswap_lp = "4d0e1c9969de6ff8d7d7518609bc207d7039d01dfd53cb9503d9de85683b1dce"
+
+[dev-dependencies.MoveStdlib]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/move-stdlib"
