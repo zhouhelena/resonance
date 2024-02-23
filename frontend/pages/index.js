@@ -26,16 +26,34 @@ export default function Home() {
   const [aptosValue, setAptosValue] = useState("");
   const [arbitrumValue, setArbitrumValue] = useState("");
   const [totalValue, setTotalValue] = useState("");
-  const [sliderValues, setSliderValues] = useState({
-    ethereum: 70,
-    polygon: 10,
-    aptos: 10,
-    arbitrum: 10,
-  });
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const tabSliderValues = [
+    {}, // Custom
+    { ethereum: 70, polygon: 10, aptos: 10, arbitrum: 10 }, // Safe
+    { ethereum: 10, polygon: 10, aptos: 70, arbitrum: 10 }, // Aggressive
+    { ethereum: 10, polygon: 10, aptos: 10, arbitrum: 70 }, // Sustainable
+  ];
+  const [sliderValues, setSliderValues] = useState(tabSliderValues[0]);
 
   const router = useRouter();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (tabIndex !== 0) {
+      const investmentValues = {
+        ethereum: (sliderValues["ethereum"] / 100) * totalValue,
+        polygon: (sliderValues["polygon"] / 100) * totalValue,
+        aptos: (sliderValues["aptos"] / 100) * totalValue,
+        arbitrum: (sliderValues["arbitrum"] / 100) * totalValue,
+      };
+
+      // TODO: Send to backend
+    }
+
+    if (tabIndex == 1) {
+      //  Use ethValue, polygonValue, etc. states directly
+    }
+
     router.push("/loading");
   };
 
@@ -44,6 +62,11 @@ export default function Home() {
     Number(polygonValue) +
     Number(aptosValue) +
     Number(arbitrumValue);
+
+  const handleTabsChange = (index) => {
+    setTabIndex(index);
+    setSliderValues(tabSliderValues[index]);
+  };
 
   const handleSliderChange = (coin, value) => {
     const totalOtherCoins = 100 - value;
@@ -67,7 +90,7 @@ export default function Home() {
           {label}
         </Button>
       </Box>
-      <Box flex="1">
+      <Box minWidth="200">
         <Slider
           aria-label={`${label}-slider`}
           value={sliderValues[coin]}
@@ -89,9 +112,14 @@ export default function Home() {
             w="10"
             borderRadius="0.5rem"
           >
-            {sliderValues[coin]}%
+            {sliderValues[coin] ? sliderValues[coin].toFixed(0) : "0"}%
           </SliderMark>
         </Slider>
+      </Box>
+      <Box maxWidth="70">
+        <Text isTruncated whiteSpace="nowrap" overflow="hidden">
+          {((sliderValues[coin] / 100) * totalValue).toFixed(2)}
+        </Text>
       </Box>
     </Flex>
   );
@@ -131,7 +159,12 @@ export default function Home() {
             </Flex>
 
             <Box p="0.5rem" bg="white" borderRadius="0 0 1.37rem 1.37rem">
-              <Tabs variant="soft-rounded" colorScheme="pink">
+              <Tabs
+                variant="soft-rounded"
+                colorScheme="pink"
+                index={tabIndex}
+                onChange={handleTabsChange}
+              >
                 <TabList justifyContent="center" pb="4">
                   <Tab>Custom</Tab>
                   <Tab>Safe</Tab>
@@ -618,7 +651,8 @@ export default function Home() {
                   color="rgb(213, 0, 102)"
                   bg="rgb(253, 234, 241)"
                   width="100%"
-                  p="1.62rem"
+                  p="1.7rem"
+                  mt="-1rem"
                   borderRadius="1.25rem"
                   _hover={{ bg: "rgb(251, 211, 225)" }}
                   onClick={handleSubmit}
@@ -646,24 +680,6 @@ export default function Home() {
             display: flex;
             justify-content: center;
             align-items: center;
-          }
-          footer img {
-            margin-left: 0.5rem;
-          }
-          footer a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            color: inherit;
-          }
-          code {
-            background: #fafafa;
-            border-radius: 5px;
-            padding: 0.75rem;
-            font-size: 1.1rem;
-            font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-              DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
           }
         `}</style>
 

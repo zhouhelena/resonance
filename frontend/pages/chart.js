@@ -61,16 +61,22 @@ export default function ChartPage() {
           justifyContent="center"
           mt={5}
         >
-          <Text
-            fontSize="xl"
-            my="4"
-            color="black"
-            fontWeight="500"
-            textAlign="center"
+          <Box
+            p="0.5rem"
+            bg="white"
+            width="1200px"
+            height="650px"
+            borderRadius="1.37rem"
           >
-            Liquidity Pool Performance
-          </Text>
-          <Box width="1000px" height="800px">
+            <Text
+              fontSize="xl"
+              my="4"
+              color="black"
+              fontWeight="500"
+              textAlign="center"
+            >
+              Liquidity Pool Performance
+            </Text>
             <canvas id="myChart" ref={chartRef}></canvas>
           </Box>
         </Flex>
@@ -90,24 +96,6 @@ export default function ChartPage() {
           display: flex;
           justify-content: center;
           align-items: center;
-        }
-        footer img {
-          margin-left: 0.5rem;
-        }
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-decoration: none;
-          color: inherit;
-        }
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
       `}</style>
     </ChakraProvider>

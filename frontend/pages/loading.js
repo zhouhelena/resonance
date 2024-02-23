@@ -1,8 +1,10 @@
-import { Flex, Box, Text, Button } from "@chakra-ui/react";
+import { Flex, Box, Text, Button, ChakraProvider } from "@chakra-ui/react";
+import Header from "./header.js";
 
 export default function LoadingPage() {
   return (
-    <div>
+    <ChakraProvider>
+      <Header />
       <Box
         w="30.62rem"
         mx="auto"
@@ -10,19 +12,13 @@ export default function LoadingPage() {
         boxShadow="rgb(0 0 0 / 8%) 0rem 0.37rem 0.62rem"
         borderRadius="1.37rem"
       >
-        <Box p="0.5rem" bg="white" borderRadius="0 0 1.37rem 1.37rem">
+        <Box p="0.5rem" bg="white" h="30rem" borderRadius="1.37rem">
           <Flex
             alignItems="center"
-            justifyContent="space-between"
-            bg="rgb(247, 248, 250)"
+            justifyContent="center"
             p="1rem 1rem 1.7rem"
-            borderRadius="1.25rem"
-            border="0.06rem solid rgb(237, 238, 242)"
           >
-            {" "}
-            <Text color="black" fontWeight="500">
-              Loading Page
-            </Text>
+            <Text>Loading...</Text>
           </Flex>
         </Box>
       </Box>
@@ -42,24 +38,6 @@ export default function LoadingPage() {
           justify-content: center;
           align-items: center;
         }
-        footer img {
-          margin-left: 0.5rem;
-        }
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-decoration: none;
-          color: inherit;
-        }
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
       `}</style>
 
       <style jsx global>{`
@@ -74,6 +52,6 @@ export default function LoadingPage() {
           box-sizing: border-box;
         }
       `}</style>
-    </div>
+    </ChakraProvider>
   );
 }
