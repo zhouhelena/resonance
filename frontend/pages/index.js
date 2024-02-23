@@ -14,16 +14,24 @@ import {
   SliderMark,
 } from "@chakra-ui/react";
 import { SettingsIcon, ChevronDownIcon, ArrowDownIcon } from "@chakra-ui/icons";
-import "../styles/Home.module.css";
 import * as React from "react";
 import { useState } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 export default function Home() {
-  const [ethValue, setEthValue] = useState(0);
-  const [polygonValue, setPolygonValue] = useState(0);
-  const [aptosValue, setAptosValue] = useState(0);
-  const [arbitrumValue, setArbitrumValue] = useState(0);
+  const [ethValue, setEthValue] = useState("");
+  const [polygonValue, setPolygonValue] = useState("");
+  const [aptosValue, setAptosValue] = useState("");
+  const [arbitrumValue, setArbitrumValue] = useState("");
+  const [totalValue, setTotalValue] = useState("");
+
+  const router = useRouter();
+
+  const handleSubmit = () => {
+    router.push("/loading");
+  };
 
   const totalSum =
     Number(ethValue) +
@@ -66,243 +74,985 @@ export default function Home() {
             </Flex>
 
             <Box p="0.5rem" bg="white" borderRadius="0 0 1.37rem 1.37rem">
-              <Flex
-                alignItems="center"
-                justifyContent="space-between"
-                bg="rgb(247, 248, 250)"
-                p="1rem 1rem 1.7rem"
-                borderRadius="1.25rem"
-                border="0.06rem solid rgb(237, 238, 242)"
-              >
-                <Box>
-                  <Button
-                    bg="white"
-                    borderRadius="1.12rem"
-                    boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                    fontWeight="500"
-                    mr="0.5rem"
-                    rightIcon={
-                      <ChevronDownIcon fontSize="1.37rem" cursor="pointer" />
-                    }
-                  >
-                    {/* TODO: Logo */}
-                    {/* <Image
+              <Tabs variant="soft-rounded" colorScheme="pink">
+                <TabList justifyContent="center" pb="4">
+                  <Tab>Custom</Tab>
+                  <Tab>Safe</Tab>
+                  <Tab>Aggressive</Tab>
+                  <Tab>Sustainable</Tab>
+                </TabList>
+                <TabPanels>
+                  <TabPanel>
+                    {" "}
+                    // Tab 1
+                    <Flex
+                      alignItems="center"
+                      justifyContent="space-between"
+                      bg="rgb(247, 248, 250)"
+                      p="1rem 1rem 1.7rem"
+                      borderRadius="1.25rem"
+                      border="0.06rem solid rgb(237, 238, 242)"
+                    >
+                      <Box>
+                        <Button
+                          bg="white"
+                          borderRadius="1.12rem"
+                          boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          fontWeight="500"
+                          mr="0.5rem"
+                          rightIcon={
+                            <ChevronDownIcon
+                              fontSize="1.37rem"
+                              cursor="pointer"
+                            />
+                          }
+                        >
+                          {/* TODO: Logo */}
+                          {/* <Image
                     boxSize="1.5rem"
                     src={etherLogo}
                     alt="Ether Logo"
                     mr="0.5rem"
                   /> */}
-                    USDC
-                  </Button>
-                </Box>
-                <Box>
-                  <Input
-                    placeholder="0.0"
-                    fontWeight="500"
-                    fontSize="1.5rem"
-                    width="100%"
-                    size="19rem"
-                    textAlign="right"
-                    bg="rgb(247, 248, 250)"
-                    outline="none"
-                    border="none"
-                    _focus={{
-                      outline: "none",
-                      boxShadow: "none",
-                    }}
-                    // isReadOnly
-                    disabled={true}
-                    value={totalSum.toFixed(2)}
-                    type="number"
-                  />
-                </Box>
-              </Flex>
+                          USDC
+                        </Button>
+                      </Box>
+                      <Box>
+                        <Input
+                          placeholder="0.0"
+                          fontWeight="500"
+                          fontSize="1.5rem"
+                          width="100%"
+                          size="19rem"
+                          textAlign="right"
+                          bg="rgb(247, 248, 250)"
+                          outline="none"
+                          border="none"
+                          _focus={{
+                            outline: "none",
+                            boxShadow: "none",
+                          }}
+                          // isReadOnly
+                          disabled={true}
+                          value={totalSum.toFixed(2)}
+                          type="number"
+                        />
+                      </Box>
+                    </Flex>
+                    <Flex
+                      alignItems="center"
+                      justifyContent="space-between"
+                      bg="rgb(247, 248, 250)"
+                      pos="relative"
+                      p="1rem 1rem 1.7rem"
+                      borderRadius="1.25rem"
+                      mt="0.25rem"
+                      border="0.06rem solid rgb(237, 238, 242)"
+                    >
+                      <Box>
+                        <Button
+                          bg="rgb(232, 0, 111)"
+                          color="white"
+                          p="0rem 1rem"
+                          borderRadius="1.12rem"
+                          boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                        >
+                          Ethereum
+                        </Button>
+                      </Box>
+                      <Flex
+                        alignItems="center"
+                        justifyContent="center"
+                        bg="white"
+                        p="0.18rem"
+                        borderRadius="0.75rem"
+                        pos="relative"
+                        top="-2.37rem"
+                        left="2.5rem"
+                      >
+                        <ArrowDownIcon
+                          bg="rgb(247, 248, 250)"
+                          color="rgb(128,128,128)"
+                          h="1.5rem"
+                          width="1.62rem"
+                          borderRadius="0.75rem"
+                        />
+                      </Flex>
+                      <Box>
+                        <Input
+                          placeholder="0.0"
+                          fontSize="1.5rem"
+                          width="100%"
+                          size="19rem"
+                          textAlign="right"
+                          bg="rgb(247, 248, 250)"
+                          outline="none"
+                          border="none"
+                          _focus={{
+                            outline: "none",
+                            boxShadow: "none",
+                          }}
+                          value={ethValue}
+                          onChange={(e) => setEthValue(e.target.value)}
+                          type="number"
+                        />
+                      </Box>
+                    </Flex>
+                    <Flex
+                      alignItems="center"
+                      justifyContent="space-between"
+                      bg="rgb(247, 248, 250)"
+                      pos="relative"
+                      p="1rem 1rem 1.7rem"
+                      borderRadius="1.25rem"
+                      mt="0.25rem"
+                      border="0.06rem solid rgb(237, 238, 242)"
+                    >
+                      <Box>
+                        <Button
+                          bg="rgb(232, 0, 111)"
+                          color="white"
+                          p="0rem 1rem"
+                          borderRadius="1.12rem"
+                          boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                        >
+                          Polygon
+                        </Button>
+                      </Box>
+                      <Box>
+                        <Input
+                          placeholder="0.0"
+                          fontSize="1.5rem"
+                          width="100%"
+                          size="19rem"
+                          textAlign="right"
+                          bg="rgb(247, 248, 250)"
+                          outline="none"
+                          border="none"
+                          _focus={{
+                            outline: "none",
+                            boxShadow: "none",
+                          }}
+                          value={polygonValue}
+                          onChange={(e) => setPolygonValue(e.target.value)}
+                          type="number"
+                        />
+                      </Box>
+                    </Flex>
+                    <Flex
+                      alignItems="center"
+                      justifyContent="space-between"
+                      bg="rgb(247, 248, 250)"
+                      pos="relative"
+                      p="1rem 1rem 1.7rem"
+                      borderRadius="1.25rem"
+                      mt="0.25rem"
+                      border="0.06rem solid rgb(237, 238, 242)"
+                    >
+                      <Box>
+                        <Button
+                          bg="rgb(232, 0, 111)"
+                          color="white"
+                          p="0rem 1rem"
+                          borderRadius="1.12rem"
+                          boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                        >
+                          Aptos
+                        </Button>
+                      </Box>
+                      <Box>
+                        <Input
+                          placeholder="0.0"
+                          fontSize="1.5rem"
+                          width="100%"
+                          size="19rem"
+                          textAlign="right"
+                          bg="rgb(247, 248, 250)"
+                          outline="none"
+                          border="none"
+                          _focus={{
+                            outline: "none",
+                            boxShadow: "none",
+                          }}
+                          value={aptosValue}
+                          onChange={(e) => setAptosValue(e.target.value)}
+                          type="number"
+                        />
+                      </Box>
+                    </Flex>
+                    <Flex
+                      alignItems="center"
+                      justifyContent="space-between"
+                      bg="rgb(247, 248, 250)"
+                      pos="relative"
+                      p="1rem 1rem 1.7rem"
+                      borderRadius="1.25rem"
+                      mt="0.25rem"
+                      border="0.06rem solid rgb(237, 238, 242)"
+                    >
+                      <Box>
+                        <Button
+                          bg="rgb(232, 0, 111)"
+                          color="white"
+                          p="0rem 1rem"
+                          borderRadius="1.12rem"
+                          boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                        >
+                          Arbitrum
+                        </Button>
+                      </Box>
+                      <Box>
+                        <Input
+                          placeholder="0.0"
+                          fontSize="1.5rem"
+                          width="100%"
+                          size="19rem"
+                          textAlign="right"
+                          bg="rgb(247, 248, 250)"
+                          outline="none"
+                          border="none"
+                          _focus={{
+                            outline: "none",
+                            boxShadow: "none",
+                          }}
+                          value={arbitrumValue}
+                          onChange={(e) => setArbitrumValue(e.target.value)}
+                          type="number"
+                        />
+                      </Box>
+                    </Flex>
+                  </TabPanel>
+                  <TabPanel>
+                    <p>
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="white"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                            fontWeight="500"
+                            mr="0.5rem"
+                            rightIcon={
+                              <ChevronDownIcon
+                                fontSize="1.37rem"
+                                cursor="pointer"
+                              />
+                            }
+                          >
+                            {/* TODO: Logo */}
+                            {/* <Image
+                    boxSize="1.5rem"
+                    src={etherLogo}
+                    alt="Ether Logo"
+                    mr="0.5rem"
+                  /> */}
+                            USDC
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontWeight="500"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={totalValue}
+                            onChange={(e) => setTotalValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
 
-              <Flex
-                alignItems="center"
-                justifyContent="space-between"
-                bg="rgb(247, 248, 250)"
-                pos="relative"
-                p="1rem 1rem 1.7rem"
-                borderRadius="1.25rem"
-                mt="0.25rem"
-                border="0.06rem solid rgb(237, 238, 242)"
-              >
-                <Box>
-                  <Button
-                    bg="rgb(232, 0, 111)"
-                    color="white"
-                    p="0rem 1rem"
-                    borderRadius="1.12rem"
-                    boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                  >
-                    Ethereum
-                  </Button>
-                </Box>
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  bg="white"
-                  p="0.18rem"
-                  borderRadius="0.75rem"
-                  pos="relative"
-                  top="-2.37rem"
-                  left="2.5rem"
-                >
-                  <ArrowDownIcon
-                    bg="rgb(247, 248, 250)"
-                    color="rgb(128,128,128)"
-                    h="1.5rem"
-                    width="1.62rem"
-                    borderRadius="0.75rem"
-                  />
-                </Flex>
-                <Box>
-                  <Input
-                    placeholder="0.0"
-                    fontSize="1.5rem"
-                    width="100%"
-                    size="19rem"
-                    textAlign="right"
-                    bg="rgb(247, 248, 250)"
-                    outline="none"
-                    border="none"
-                    _focus={{
-                      outline: "none",
-                      boxShadow: "none",
-                    }}
-                    value={ethValue}
-                    onChange={(e) => setEthValue(e.target.value)}
-                    type="number"
-                  />
-                </Box>
-              </Flex>
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Ethereum
+                          </Button>
+                        </Box>
+                        <Flex
+                          alignItems="center"
+                          justifyContent="center"
+                          bg="white"
+                          p="0.18rem"
+                          borderRadius="0.75rem"
+                          pos="relative"
+                          top="-2.37rem"
+                          left="2.5rem"
+                        >
+                          <ArrowDownIcon
+                            bg="rgb(247, 248, 250)"
+                            color="rgb(128,128,128)"
+                            h="1.5rem"
+                            width="1.62rem"
+                            borderRadius="0.75rem"
+                          />
+                        </Flex>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={ethValue}
+                            onChange={(e) => setEthValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
 
-              <Flex
-                alignItems="center"
-                justifyContent="space-between"
-                bg="rgb(247, 248, 250)"
-                pos="relative"
-                p="1rem 1rem 1.7rem"
-                borderRadius="1.25rem"
-                mt="0.25rem"
-                border="0.06rem solid rgb(237, 238, 242)"
-              >
-                <Box>
-                  <Button
-                    bg="rgb(232, 0, 111)"
-                    color="white"
-                    p="0rem 1rem"
-                    borderRadius="1.12rem"
-                    boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                  >
-                    Polygon
-                  </Button>
-                </Box>
-                <Box>
-                  <Input
-                    placeholder="0.0"
-                    fontSize="1.5rem"
-                    width="100%"
-                    size="19rem"
-                    textAlign="right"
-                    bg="rgb(247, 248, 250)"
-                    outline="none"
-                    border="none"
-                    _focus={{
-                      outline: "none",
-                      boxShadow: "none",
-                    }}
-                    value={polygonValue}
-                    onChange={(e) => setPolygonValue(e.target.value)}
-                    type="number"
-                  />
-                </Box>
-              </Flex>
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Polygon
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={polygonValue}
+                            onChange={(e) => setPolygonValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
 
-              <Flex
-                alignItems="center"
-                justifyContent="space-between"
-                bg="rgb(247, 248, 250)"
-                pos="relative"
-                p="1rem 1rem 1.7rem"
-                borderRadius="1.25rem"
-                mt="0.25rem"
-                border="0.06rem solid rgb(237, 238, 242)"
-              >
-                <Box>
-                  <Button
-                    bg="rgb(232, 0, 111)"
-                    color="white"
-                    p="0rem 1rem"
-                    borderRadius="1.12rem"
-                    boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                  >
-                    Aptos
-                  </Button>
-                </Box>
-                <Box>
-                  <Input
-                    placeholder="0.0"
-                    fontSize="1.5rem"
-                    width="100%"
-                    size="19rem"
-                    textAlign="right"
-                    bg="rgb(247, 248, 250)"
-                    outline="none"
-                    border="none"
-                    _focus={{
-                      outline: "none",
-                      boxShadow: "none",
-                    }}
-                    value={aptosValue}
-                    onChange={(e) => setAptosValue(e.target.value)}
-                    type="number"
-                  />
-                </Box>
-              </Flex>
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Aptos
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={aptosValue}
+                            onChange={(e) => setAptosValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
 
-              <Flex
-                alignItems="center"
-                justifyContent="space-between"
-                bg="rgb(247, 248, 250)"
-                pos="relative"
-                p="1rem 1rem 1.7rem"
-                borderRadius="1.25rem"
-                mt="0.25rem"
-                border="0.06rem solid rgb(237, 238, 242)"
-              >
-                <Box>
-                  <Button
-                    bg="rgb(232, 0, 111)"
-                    color="white"
-                    p="0rem 1rem"
-                    borderRadius="1.12rem"
-                    boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                  >
-                    Arbitrum
-                  </Button>
-                </Box>
-                <Box>
-                  <Input
-                    placeholder="0.0"
-                    fontSize="1.5rem"
-                    width="100%"
-                    size="19rem"
-                    textAlign="right"
-                    bg="rgb(247, 248, 250)"
-                    outline="none"
-                    border="none"
-                    _focus={{
-                      outline: "none",
-                      boxShadow: "none",
-                    }}
-                    value={arbitrumValue}
-                    onChange={(e) => setArbitrumValue(e.target.value)}
-                    type="number"
-                  />
-                </Box>
-              </Flex>
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Arbitrum
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={arbitrumValue}
+                            onChange={(e) => setArbitrumValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
+                    </p>
+                  </TabPanel>
+                  <TabPanel>
+                    <p>
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="white"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                            fontWeight="500"
+                            mr="0.5rem"
+                            rightIcon={
+                              <ChevronDownIcon
+                                fontSize="1.37rem"
+                                cursor="pointer"
+                              />
+                            }
+                          >
+                            {/* TODO: Logo */}
+                            {/* <Image
+                    boxSize="1.5rem"
+                    src={etherLogo}
+                    alt="Ether Logo"
+                    mr="0.5rem"
+                  /> */}
+                            USDC
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontWeight="500"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={totalValue}
+                            onChange={(e) => setTotalValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
+
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Ethereum
+                          </Button>
+                        </Box>
+                        <Flex
+                          alignItems="center"
+                          justifyContent="center"
+                          bg="white"
+                          p="0.18rem"
+                          borderRadius="0.75rem"
+                          pos="relative"
+                          top="-2.37rem"
+                          left="2.5rem"
+                        >
+                          <ArrowDownIcon
+                            bg="rgb(247, 248, 250)"
+                            color="rgb(128,128,128)"
+                            h="1.5rem"
+                            width="1.62rem"
+                            borderRadius="0.75rem"
+                          />
+                        </Flex>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={ethValue}
+                            onChange={(e) => setEthValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
+
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Polygon
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={polygonValue}
+                            onChange={(e) => setPolygonValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
+
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Aptos
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={aptosValue}
+                            onChange={(e) => setAptosValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
+
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Arbitrum
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={arbitrumValue}
+                            onChange={(e) => setArbitrumValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
+                    </p>
+                  </TabPanel>
+                  <TabPanel>
+                    <p>
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="white"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                            fontWeight="500"
+                            mr="0.5rem"
+                            rightIcon={
+                              <ChevronDownIcon
+                                fontSize="1.37rem"
+                                cursor="pointer"
+                              />
+                            }
+                          >
+                            {/* TODO: Logo */}
+                            {/* <Image
+                    boxSize="1.5rem"
+                    src={etherLogo}
+                    alt="Ether Logo"
+                    mr="0.5rem"
+                  /> */}
+                            USDC
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontWeight="500"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={totalValue}
+                            onChange={(e) => setTotalValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
+
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Ethereum
+                          </Button>
+                        </Box>
+                        <Flex
+                          alignItems="center"
+                          justifyContent="center"
+                          bg="white"
+                          p="0.18rem"
+                          borderRadius="0.75rem"
+                          pos="relative"
+                          top="-2.37rem"
+                          left="2.5rem"
+                        >
+                          <ArrowDownIcon
+                            bg="rgb(247, 248, 250)"
+                            color="rgb(128,128,128)"
+                            h="1.5rem"
+                            width="1.62rem"
+                            borderRadius="0.75rem"
+                          />
+                        </Flex>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={ethValue}
+                            onChange={(e) => setEthValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
+
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Polygon
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={polygonValue}
+                            onChange={(e) => setPolygonValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
+
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Aptos
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={aptosValue}
+                            onChange={(e) => setAptosValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
+
+                      <Flex
+                        alignItems="center"
+                        justifyContent="space-between"
+                        bg="rgb(247, 248, 250)"
+                        pos="relative"
+                        p="1rem 1rem 1.7rem"
+                        borderRadius="1.25rem"
+                        mt="0.25rem"
+                        border="0.06rem solid rgb(237, 238, 242)"
+                      >
+                        <Box>
+                          <Button
+                            bg="rgb(232, 0, 111)"
+                            color="white"
+                            p="0rem 1rem"
+                            borderRadius="1.12rem"
+                            boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                          >
+                            Arbitrum
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Input
+                            placeholder="0.0"
+                            fontSize="1.5rem"
+                            width="100%"
+                            size="19rem"
+                            textAlign="right"
+                            bg="rgb(247, 248, 250)"
+                            outline="none"
+                            border="none"
+                            _focus={{
+                              outline: "none",
+                              boxShadow: "none",
+                            }}
+                            value={arbitrumValue}
+                            onChange={(e) => setArbitrumValue(e.target.value)}
+                            type="number"
+                          />
+                        </Box>
+                      </Flex>
+                    </p>
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
 
               {/* <Box p={4} pt={6} w="full">
                 <Slider
@@ -344,7 +1094,7 @@ export default function Home() {
                   p="1.62rem"
                   borderRadius="1.25rem"
                   _hover={{ bg: "rgb(251, 211, 225)" }}
-                  onClick={""}
+                  onClick={handleSubmit}
                 >
                   Invest
                 </Button>
