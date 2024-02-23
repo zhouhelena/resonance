@@ -20,6 +20,11 @@ async function main() {
       WETH_ADDRESS = process.env.WETH_MUMBAI_ADDRESS || "";
       UNISWAP_POOL_ADDRESS = process.env.UNISWAP_POOL_MUMBAI_ADDRESS || "";
       break;
+    case "localhost":
+      USDC_ADDRESS = process.env.USDC_LOCALHOST_ADDRESS || "";
+      WETH_ADDRESS = process.env.WETH_LOCALHOST_ADDRESS || "";
+      UNISWAP_POOL_ADDRESS = process.env.UNISWAP_POOL_LOCALHOST_ADDRESS || "";
+      break;
     default:
       throw new Error("Unsupported network");
   }

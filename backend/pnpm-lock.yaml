@@ -11,6 +11,12 @@ dependencies:
   '@chainlink/contracts-ccip':
     specifier: 1.4.0
     version: 1.4.0(ethers@6.11.1)
+  '@openzeppelin/contracts':
+    specifier: ^5.0.1
+    version: 5.0.1
+  '@uniswap/v3-core':
+    specifier: ^1.0.1
+    version: 1.0.1
   dotenv:
     specifier: ^16.4.5
     version: 16.4.5
@@ -972,6 +978,10 @@ packages:
     resolution: {integrity: sha512-He3LieZ1pP2TNt5JbkPA4PNT9WC3gOTOlDcFGJW4Le4QKqwmiNJCRt44APfxMxvq7OugU/cqYuPcSBzOw38DAg==}
     dev: false
 
+  /@openzeppelin/contracts@5.0.1:
+    resolution: {integrity: sha512-yQJaT5HDp9hYOOp4jTYxMsR02gdFZFXhewX5HW9Jo4fsqSVqqyIO/xTHdWDaKX5a3pv1txmf076Lziz+sO7L1w==}
+    dev: false
+
   /@openzeppelin/upgrades-core@1.32.5:
     resolution: {integrity: sha512-R0wprsyJ4xWiRW05kaTfZZkRVpG2g0af3/hpjE7t2mX0Eb2n40MQLokTwqIk4LDzpp910JfLSpB0vBuZ6WNPog==}
     hasBin: true
@@ -1236,6 +1246,11 @@ packages:
     resolution: {integrity: sha512-hHxJU6PAEUn0TP4S/ZOzuTUvJWuZ6eIKeNKb5RBpODvSl6hp1Wrw4s7ATY50rklRCScUDpHzVA/DQdSjJ3UoYQ==}
     dependencies:
       '@types/node': 20.11.19
+
+  /@uniswap/v3-core@1.0.1:
+    resolution: {integrity: sha512-7pVk4hEm00j9tc71Y9+ssYpO6ytkeI0y7WE9P6UcmNzhxPePwyAxImuhVsTqWK9YFvzgtvzJHi64pBl4jUzKMQ==}
+    engines: {node: '>=10'}
+    dev: false
 
   /@yarnpkg/lockfile@1.1.0:
     resolution: {integrity: sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==}

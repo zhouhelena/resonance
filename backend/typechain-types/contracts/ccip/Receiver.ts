@@ -66,7 +66,7 @@ export interface ReceiverInterface extends Interface {
       | "supportsInterface"
   ): FunctionFragment;
 
-  getEvent(nameOrSignatureOrTopic: "MessageReceived"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TokensReceived"): EventFragment;
 
   encodeFunctionData(
     functionFragment: "ccipReceive",
@@ -97,24 +97,24 @@ export interface ReceiverInterface extends Interface {
   ): Result;
 }
 
-export namespace MessageReceivedEvent {
+export namespace TokensReceivedEvent {
   export type InputTuple = [
     messageId: BytesLike,
     sourceChainSelector: BigNumberish,
     sender: AddressLike,
-    text: string
+    amount: BigNumberish
   ];
   export type OutputTuple = [
     messageId: string,
     sourceChainSelector: bigint,
     sender: string,
-    text: string
+    amount: bigint
   ];
   export interface OutputObject {
     messageId: string;
     sourceChainSelector: bigint;
     sender: string;
-    text: string;
+    amount: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -173,7 +173,7 @@ export interface Receiver extends BaseContract {
 
   getLastReceivedMessageDetails: TypedContractMethod<
     [],
-    [[string, string] & { messageId: string; text: string }],
+    [[string, bigint] & { messageId: string; amount: bigint }],
     "view"
   >;
 
@@ -200,7 +200,7 @@ export interface Receiver extends BaseContract {
     nameOrSignature: "getLastReceivedMessageDetails"
   ): TypedContractMethod<
     [],
-    [[string, string] & { messageId: string; text: string }],
+    [[string, bigint] & { messageId: string; amount: bigint }],
     "view"
   >;
   getFunction(
@@ -211,23 +211,23 @@ export interface Receiver extends BaseContract {
   ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
 
   getEvent(
-    key: "MessageReceived"
+    key: "TokensReceived"
   ): TypedContractEvent<
-    MessageReceivedEvent.InputTuple,
-    MessageReceivedEvent.OutputTuple,
-    MessageReceivedEvent.OutputObject
+    TokensReceivedEvent.InputTuple,
+    TokensReceivedEvent.OutputTuple,
+    TokensReceivedEvent.OutputObject
   >;
 
   filters: {
-    "MessageReceived(bytes32,uint64,address,string)": TypedContractEvent<
-      MessageReceivedEvent.InputTuple,
-      MessageReceivedEvent.OutputTuple,
-      MessageReceivedEvent.OutputObject
+    "TokensReceived(bytes32,uint64,address,uint256)": TypedContractEvent<
+      TokensReceivedEvent.InputTuple,
+      TokensReceivedEvent.OutputTuple,
+      TokensReceivedEvent.OutputObject
     >;
-    MessageReceived: TypedContractEvent<
-      MessageReceivedEvent.InputTuple,
-      MessageReceivedEvent.OutputTuple,
-      MessageReceivedEvent.OutputObject
+    TokensReceived: TypedContractEvent<
+      TokensReceivedEvent.InputTuple,
+      TokensReceivedEvent.OutputTuple,
+      TokensReceivedEvent.OutputObject
     >;
   };
 }

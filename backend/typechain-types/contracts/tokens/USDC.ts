@@ -30,8 +30,6 @@ export interface USDCInterface extends Interface {
       | "approve"
       | "balanceOf"
       | "decimals"
-      | "decreaseAllowance"
-      | "increaseAllowance"
       | "mint"
       | "name"
       | "symbol"
@@ -56,14 +54,6 @@ export interface USDCInterface extends Interface {
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "decreaseAllowance",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "mint",
     values: [AddressLike, BigNumberish]
   ): string;
@@ -86,14 +76,6 @@ export interface USDCInterface extends Interface {
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
@@ -194,7 +176,7 @@ export interface USDC extends BaseContract {
   >;
 
   approve: TypedContractMethod<
-    [spender: AddressLike, amount: BigNumberish],
+    [spender: AddressLike, value: BigNumberish],
     [boolean],
     "nonpayable"
   >;
@@ -202,18 +184,6 @@ export interface USDC extends BaseContract {
   balanceOf: TypedContractMethod<[account: AddressLike], [bigint], "view">;
 
   decimals: TypedContractMethod<[], [bigint], "view">;
-
-  decreaseAllowance: TypedContractMethod<
-    [spender: AddressLike, subtractedValue: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  increaseAllowance: TypedContractMethod<
-    [spender: AddressLike, addedValue: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
 
   mint: TypedContractMethod<
     [to: AddressLike, amount: BigNumberish],
@@ -228,13 +198,13 @@ export interface USDC extends BaseContract {
   totalSupply: TypedContractMethod<[], [bigint], "view">;
 
   transfer: TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
+    [to: AddressLike, value: BigNumberish],
     [boolean],
     "nonpayable"
   >;
 
   transferFrom: TypedContractMethod<
-    [sender: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [from: AddressLike, to: AddressLike, value: BigNumberish],
     [boolean],
     "nonpayable"
   >;
@@ -253,7 +223,7 @@ export interface USDC extends BaseContract {
   getFunction(
     nameOrSignature: "approve"
   ): TypedContractMethod<
-    [spender: AddressLike, amount: BigNumberish],
+    [spender: AddressLike, value: BigNumberish],
     [boolean],
     "nonpayable"
   >;
@@ -263,20 +233,6 @@ export interface USDC extends BaseContract {
   getFunction(
     nameOrSignature: "decimals"
   ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "decreaseAllowance"
-  ): TypedContractMethod<
-    [spender: AddressLike, subtractedValue: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "increaseAllowance"
-  ): TypedContractMethod<
-    [spender: AddressLike, addedValue: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
   getFunction(
     nameOrSignature: "mint"
   ): TypedContractMethod<
@@ -296,14 +252,14 @@ export interface USDC extends BaseContract {
   getFunction(
     nameOrSignature: "transfer"
   ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
+    [to: AddressLike, value: BigNumberish],
     [boolean],
     "nonpayable"
   >;
   getFunction(
     nameOrSignature: "transferFrom"
   ): TypedContractMethod<
-    [sender: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [from: AddressLike, to: AddressLike, value: BigNumberish],
     [boolean],
     "nonpayable"
   >;

@@ -11,6 +11,8 @@
   "dependencies": {
     "@chainlink/contracts": "^0.8.0",
     "@chainlink/contracts-ccip": "1.4.0",
+    "@openzeppelin/contracts": "^5.0.1",
+    "@uniswap/v3-core": "^1.0.1",
     "dotenv": "^16.4.5",
     "hardhat": "^2.20.1"
   },

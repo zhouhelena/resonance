@@ -2,5 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { LinkTokenInterface } from "./LinkTokenInterface";
+export type { MainChain } from "./MainChain";
 export type { Receiver } from "./Receiver";
 export type { Sender } from "./Sender";

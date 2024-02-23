@@ -28,16 +28,15 @@ export interface SenderInterface extends Interface {
     nameOrSignature:
       | "acceptOwnership"
       | "owner"
-      | "sendMessagePayLink"
-      | "sendMessagePayNative"
+      | "sendTokens"
       | "transferOwnership"
   ): FunctionFragment;
 
   getEvent(
     nameOrSignatureOrTopic:
-      | "MessageSent"
       | "OwnershipTransferRequested"
       | "OwnershipTransferred"
+      | "TokensSent"
   ): EventFragment;
 
   encodeFunctionData(
@@ -46,12 +45,8 @@ export interface SenderInterface extends Interface {
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "sendMessagePayLink",
-    values: [BigNumberish, AddressLike, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "sendMessagePayNative",
-    values: [BigNumberish, AddressLike, string]
+    functionFragment: "sendTokens",
+    values: [BigNumberish, AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -63,49 +58,11 @@ export interface SenderInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "sendMessagePayLink",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "sendMessagePayNative",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "sendTokens", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
-}
-
-export namespace MessageSentEvent {
-  export type InputTuple = [
-    messageId: BytesLike,
-    destinationChainSelector: BigNumberish,
-    receiver: AddressLike,
-    text: string,
-    feeToken: AddressLike,
-    fees: BigNumberish
-  ];
-  export type OutputTuple = [
-    messageId: string,
-    destinationChainSelector: bigint,
-    receiver: string,
-    text: string,
-    feeToken: string,
-    fees: bigint
-  ];
-  export interface OutputObject {
-    messageId: string;
-    destinationChainSelector: bigint;
-    receiver: string;
-    text: string;
-    feeToken: string;
-    fees: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export namespace OwnershipTransferRequestedEvent {
@@ -127,6 +84,37 @@ export namespace OwnershipTransferredEvent {
   export interface OutputObject {
     from: string;
     to: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace TokensSentEvent {
+  export type InputTuple = [
+    messageId: BytesLike,
+    destinationChainSelector: BigNumberish,
+    receiver: AddressLike,
+    amount: BigNumberish,
+    feeToken: AddressLike,
+    fees: BigNumberish
+  ];
+  export type OutputTuple = [
+    messageId: string,
+    destinationChainSelector: bigint,
+    receiver: string,
+    amount: bigint,
+    feeToken: string,
+    fees: bigint
+  ];
+  export interface OutputObject {
+    messageId: string;
+    destinationChainSelector: bigint;
+    receiver: string;
+    amount: bigint;
+    feeToken: string;
+    fees: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -181,21 +169,11 @@ export interface Sender extends BaseContract {
 
   owner: TypedContractMethod<[], [string], "view">;
 
-  sendMessagePayLink: TypedContractMethod<
+  sendTokens: TypedContractMethod<
     [
       destinationChainSelector: BigNumberish,
       receiver: AddressLike,
-      text: string
-    ],
-    [string],
-    "nonpayable"
-  >;
-
-  sendMessagePayNative: TypedContractMethod<
-    [
-      destinationChainSelector: BigNumberish,
-      receiver: AddressLike,
-      text: string
+      amount: BigNumberish
     ],
     [string],
     "nonpayable"
@@ -218,23 +196,12 @@ export interface Sender extends BaseContract {
     nameOrSignature: "owner"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
-    nameOrSignature: "sendMessagePayLink"
+    nameOrSignature: "sendTokens"
   ): TypedContractMethod<
     [
       destinationChainSelector: BigNumberish,
       receiver: AddressLike,
-      text: string
-    ],
-    [string],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "sendMessagePayNative"
-  ): TypedContractMethod<
-    [
-      destinationChainSelector: BigNumberish,
-      receiver: AddressLike,
-      text: string
+      amount: BigNumberish
     ],
     [string],
     "nonpayable"
@@ -243,13 +210,6 @@ export interface Sender extends BaseContract {
     nameOrSignature: "transferOwnership"
   ): TypedContractMethod<[to: AddressLike], [void], "nonpayable">;
 
-  getEvent(
-    key: "MessageSent"
-  ): TypedContractEvent<
-    MessageSentEvent.InputTuple,
-    MessageSentEvent.OutputTuple,
-    MessageSentEvent.OutputObject
-  >;
   getEvent(
     key: "OwnershipTransferRequested"
   ): TypedContractEvent<
@@ -264,19 +224,15 @@ export interface Sender extends BaseContract {
     OwnershipTransferredEvent.OutputTuple,
     OwnershipTransferredEvent.OutputObject
   >;
+  getEvent(
+    key: "TokensSent"
+  ): TypedContractEvent<
+    TokensSentEvent.InputTuple,
+    TokensSentEvent.OutputTuple,
+    TokensSentEvent.OutputObject
+  >;
 
   filters: {
-    "MessageSent(bytes32,uint64,address,string,address,uint256)": TypedContractEvent<
-      MessageSentEvent.InputTuple,
-      MessageSentEvent.OutputTuple,
-      MessageSentEvent.OutputObject
-    >;
-    MessageSent: TypedContractEvent<
-      MessageSentEvent.InputTuple,
-      MessageSentEvent.OutputTuple,
-      MessageSentEvent.OutputObject
-    >;
-
     "OwnershipTransferRequested(address,address)": TypedContractEvent<
       OwnershipTransferRequestedEvent.InputTuple,
       OwnershipTransferRequestedEvent.OutputTuple,
@@ -297,6 +253,17 @@ export interface Sender extends BaseContract {
       OwnershipTransferredEvent.InputTuple,
       OwnershipTransferredEvent.OutputTuple,
       OwnershipTransferredEvent.OutputObject
+    >;
+
+    "TokensSent(bytes32,uint64,address,uint256,address,uint256)": TypedContractEvent<
+      TokensSentEvent.InputTuple,
+      TokensSentEvent.OutputTuple,
+      TokensSentEvent.OutputObject
+    >;
+    TokensSent: TypedContractEvent<
+      TokensSentEvent.InputTuple,
+      TokensSentEvent.OutputTuple,
+      TokensSentEvent.OutputObject
     >;
   };
 }

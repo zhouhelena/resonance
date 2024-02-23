@@ -1,9 +1,49 @@
 import { ethers, network } from "hardhat";
 
 async function main() {
-    const SENDER_ADDRESS = "0x41B9FA8048bcFd2ac567F2DE81C0366ad985C017";
-    const RECEIVER_ADDRESS = "0x338328f2d4abbA2E425C0780837A5F1d4F391Ce4";
-    const DESTINATION_CHAIN_SELECTOR = "16015286601757825753";
+    let USDC_ADDRESS = "";
+    let UNISWAP_POOL_ADDRESS = "";
+    let SENDER_ADDRESS = "";
+    switch (network.name) {
+        case "sepolia":
+            USDC_ADDRESS = process.env.USDC_SEPOLIA_ADDRESS || "";
+            UNISWAP_POOL_ADDRESS = process.env.UNISWAP_POOL_SEPOLIA_ADDRESS || "";
+            SENDER_ADDRESS = process.env.SENDER_SEPOLIA_ADDRESS || "";
+            break;
+        case "arbitrum":
+            USDC_ADDRESS = process.env.USDC_ARBITRUM_ADDRESS || "";
+            UNISWAP_POOL_ADDRESS = process.env.UNISWAP_POOL_ARBITRUM_ADDRESS || "";
+            SENDER_ADDRESS = process.env.SENDER_ARBITRUM_ADDRESS || "";
+            break;
+        case "mumbai":
+            USDC_ADDRESS = process.env.USDC_MUMBAI_ADDRESS || "";
+            UNISWAP_POOL_ADDRESS = process.env.UNISWAP_POOL_MUMBAI_ADDRESS || "";
+            SENDER_ADDRESS = process.env.SENDER_MUMBAI_ADDRESS || "";
+            break;
+        default:
+            throw new Error("Unsupported network");
+    }
+
+    let RECEIVER_ADDRESS = "";
+    let DESTINATION_CHAIN_SELECTOR = "";
+
+    let destination = process.env.DESTINATION || "";
+    switch (destination) {
+        case "sepolia":
+            RECEIVER_ADDRESS = process.env.RECEIVER_SEPOLIA_ADDRESS || "";
+            DESTINATION_CHAIN_SELECTOR = process.env.SEPOLIA_DESTINATION_ADDRESS || "";
+            break;
+        case "arbitrum":
+            RECEIVER_ADDRESS = process.env.RECEIVER_ARBITRUM_ADDRESS || "";
+            DESTINATION_CHAIN_SELECTOR = process.env.ARBITRUM_DESTINATION_ADDRESS || "";
+            break;
+        case "mumbai":
+            RECEIVER_ADDRESS = process.env.RECEIVER_MUMBAI_ADDRESS || "";
+            DESTINATION_CHAIN_SELECTOR = process.env.MUMBAI_DESTINATION_ADDRESS || "";
+            break;
+        default:
+            break;
+    }
 
     const [deployer] = await ethers.getSigners();
     console.log("Deploying contracts with the account:", deployer.address);
@@ -11,7 +51,10 @@ async function main() {
     const sender = await ethers.getContractAt("Sender", SENDER_ADDRESS);
     console.log("Got sender contract at:", await sender.getAddress());
 
-    const sendMessageTx = await sender.sendMessagePayLink(DESTINATION_CHAIN_SELECTOR, RECEIVER_ADDRESS, "Hello, world!");
+    const usdc = await ethers.getContractAt("ERC20", USDC_ADDRESS);
+    console.log("Got usdc at:", await usdc.getAddress());
+
+    const sendMessageTx = await sender.sendTokens(DESTINATION_CHAIN_SELECTOR, RECEIVER_ADDRESS, 10);
     await sendMessageTx.wait();
 
     console.log("Sent message to:", RECEIVER_ADDRESS);
