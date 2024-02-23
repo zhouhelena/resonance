@@ -33,23 +33,19 @@ async function main() {
 
   console.log("Calling contracts with the account:", deployer.address);
 
-  const usdc = await ethers.getContractAt("IERC20", USDC_ADDRESS);
-
+  const usdc = await ethers.getContractAt("CustomToken", USDC_ADDRESS);
   console.log("Got usdc at", await usdc.getAddress());
 
   const usdcApproveTx = await usdc.approve(RANGE_VAULT_ADDRESS, 1_000_000);
   await usdcApproveTx.wait();
-
   console.log("Approved usdc")
 
-  const weth = await ethers.getContractAt("IERC20", WETH_ADDRESS);
+  // const weth = await ethers.getContractAt("CustomToken", WETH_ADDRESS);
+  // console.log("Got weth at", await weth.getAddress());
 
-  console.log("Got weth at", await weth.getAddress());
-
-  const wethApproveTx = await weth.approve(RANGE_VAULT_ADDRESS, 1_000_000);
-  await wethApproveTx.wait();
-
-  console.log("Approved weth")
+  // const wethApproveTx = await weth.approve(RANGE_VAULT_ADDRESS, 1_000_000);
+  // await wethApproveTx.wait();
+  // console.log("Approved weth")
 
   const rangeVault = await ethers.getContractAt("RangeProtocolVault", RANGE_VAULT_ADDRESS);
 
@@ -60,7 +56,6 @@ async function main() {
 
   console.log("Set ticks")
 
-  const bytes = ethers.encodeBytes32String("");
   const tx = await rangeVault.mint(60, [1_000_000, 1_000_000])
   await tx.wait();
 

@@ -87,7 +87,7 @@ export interface RangeProtocolVaultInterface extends Interface {
       | "LiquidityAdded"
       | "LiquidityRemoved"
       | "MintStarted"
-      | "Minted"
+      | "MintedPosition"
       | "Swapped"
       | "TicksSet"
       | "Transfer"
@@ -442,7 +442,7 @@ export namespace MintStartedEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
-export namespace MintedEvent {
+export namespace MintedPositionEvent {
   export type InputTuple = [
     receiver: AddressLike,
     mintAmount: BigNumberish,
@@ -936,11 +936,11 @@ export interface RangeProtocolVault extends BaseContract {
     MintStartedEvent.OutputObject
   >;
   getEvent(
-    key: "Minted"
+    key: "MintedPosition"
   ): TypedContractEvent<
-    MintedEvent.InputTuple,
-    MintedEvent.OutputTuple,
-    MintedEvent.OutputObject
+    MintedPositionEvent.InputTuple,
+    MintedPositionEvent.OutputTuple,
+    MintedPositionEvent.OutputObject
   >;
   getEvent(
     key: "Swapped"
@@ -1053,15 +1053,15 @@ export interface RangeProtocolVault extends BaseContract {
       MintStartedEvent.OutputObject
     >;
 
-    "Minted(address,uint256,uint256,uint256)": TypedContractEvent<
-      MintedEvent.InputTuple,
-      MintedEvent.OutputTuple,
-      MintedEvent.OutputObject
+    "MintedPosition(address,uint256,uint256,uint256)": TypedContractEvent<
+      MintedPositionEvent.InputTuple,
+      MintedPositionEvent.OutputTuple,
+      MintedPositionEvent.OutputObject
     >;
-    Minted: TypedContractEvent<
-      MintedEvent.InputTuple,
-      MintedEvent.OutputTuple,
-      MintedEvent.OutputObject
+    MintedPosition: TypedContractEvent<
+      MintedPositionEvent.InputTuple,
+      MintedPositionEvent.OutputTuple,
+      MintedPositionEvent.OutputObject
     >;
 
     "Swapped(bool,int256,int256)": TypedContractEvent<

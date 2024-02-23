@@ -33,7 +33,7 @@ async function main() {
 
   console.log("Calling contracts with the account:", deployer.address);
 
-  const usdc = await ethers.getContractAt("USDC", USDC_ADDRESS);
+  const usdc = await ethers.getContractAt("CustomToken", USDC_ADDRESS);
 
   console.log("Got usdc at", await usdc.getAddress());
 
@@ -42,7 +42,7 @@ async function main() {
 
   console.log("Approved usdc")
 
-  const weth = await ethers.getContractAt("WETH", WETH_ADDRESS);
+  const weth = await ethers.getContractAt("CustomToken", WETH_ADDRESS);
 
   console.log("Got weth at", await weth.getAddress());
 
@@ -54,6 +54,8 @@ async function main() {
   const uniswapPool = await ethers.getContractAt("UniswapV3Pool", UNISWAP_POOL_ADDRESS);
 
   console.log("Got pool at", await uniswapPool.getAddress());
+  console.log("token0:", await uniswapPool.token0());
+  console.log("token1:", await uniswapPool.token1());
 
   const bytes = ethers.encodeBytes32String("");
   const tx = await uniswapPool.mint(deployer.address, -886800, 886800, 100, bytes)

@@ -72,8 +72,6 @@ contract RangeProtocolVault is
 
         mintStarted = true;
         inThePosition = true;
-        lowerTick = -887200;
-        upperTick = 887200;
     }
 
     function setTicks(int24 _lowerTick, int24 _upperTick) external {
@@ -151,7 +149,7 @@ contract RangeProtocolVault is
             pool.mint(address(this), lowerTick, upperTick, liquidityMinted, "");
         }
 
-        emit Minted(msg.sender, mintAmount, amount0, amount1);
+        emit MintedPosition(msg.sender, mintAmount, amount0, amount1);
     }
 
     struct BurnLocalVars {

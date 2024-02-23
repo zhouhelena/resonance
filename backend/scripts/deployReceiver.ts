@@ -3,22 +3,22 @@ import { ethers, network } from "hardhat";
 async function main() {
     let CCIP_ROUTER_ADDRESS = "";
     let USDC_ADDRESS = "";
-    let UNISWAP_POOL_ADDRESS = "";
+    let RANGE_VAULT_ADDRESS = "";
     switch (network.name) {
         case "sepolia":
             CCIP_ROUTER_ADDRESS = process.env.CCIP_ROUTER_SEPOLIA_ADDRESS || "";
             USDC_ADDRESS = process.env.USDC_SEPOLIA_ADDRESS || "";
-            UNISWAP_POOL_ADDRESS = process.env.UNISWAP_POOL_SEPOLIA_ADDRESS || "";
+            RANGE_VAULT_ADDRESS = process.env.RANGE_VAULT_SEPOLIA_ADDRESS || "";
             break;
         case "arbitrum":
             CCIP_ROUTER_ADDRESS = process.env.CCIP_ROUTER_ARBITRUM_ADDRESS || "";
             USDC_ADDRESS = process.env.USDC_ARBITRUM_ADDRESS || "";
-            UNISWAP_POOL_ADDRESS = process.env.UNISWAP_POOL_ARBITRUM_ADDRESS || "";
+            RANGE_VAULT_ADDRESS = process.env.RANGE_VAULT_ARBITRUM_ADDRESS || "";
             break;
         case "mumbai":
             CCIP_ROUTER_ADDRESS = process.env.CCIP_ROUTER_MUMBAI_ADDRESS || "";
             USDC_ADDRESS = process.env.USDC_MUMBAI_ADDRESS || "";
-            UNISWAP_POOL_ADDRESS = process.env.UNISWAP_POOL_MUMBAI_ADDRESS || "";
+            RANGE_VAULT_ADDRESS = process.env.RANGE_VAULT_MUMBAI_ADDRESS || "";
             break;
         default:
             throw new Error("Unsupported network");
@@ -27,12 +27,12 @@ async function main() {
     const [deployer] = await ethers.getSigners();
     console.log("Deploying contracts with the account:", deployer.address);
 
-    const receiver = await ethers.deployContract("Receiver", [CCIP_ROUTER_ADDRESS, USDC_ADDRESS, UNISWAP_POOL_ADDRESS]);
+    const receiver = await ethers.deployContract("Receiver", [CCIP_ROUTER_ADDRESS, USDC_ADDRESS, RANGE_VAULT_ADDRESS]);
     await receiver.waitForDeployment();
 
     console.log("Receiver deployed to:", await receiver.getAddress());
 
-    const usdc = await ethers.getContractAt("USDC", USDC_ADDRESS);
+    const usdc = await ethers.getContractAt("CustomToken", USDC_ADDRESS);
     console.log("Got usdc at", await usdc.getAddress());
 
     const mintTx = await usdc.mint(await receiver.getAddress(), ethers.parseEther("100000"));

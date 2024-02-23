@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
 import {CCIPReceiver} from "@chainlink/contracts-ccip/src/v0.8/ccip/applications/CCIPReceiver.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {IUniswapV3Pool} from "@uniswap/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
+import {IRangeProtocolVault} from "../range/interfaces/IRangeProtocolVault.sol";
 
 /**
  * THIS IS AN EXAMPLE CONTRACT THAT USES HARDCODED VALUES FOR CLARITY.
@@ -26,13 +26,13 @@ contract Receiver is CCIPReceiver {
     uint256 private s_lastReceivedAmount; // Store the last received text.
 
     IERC20 private s_usdc;
-    IUniswapV3Pool private s_pool;
+    IRangeProtocolVault private s_vault;
 
     /// @notice Constructor initializes the contract with the router address.
     /// @param router The address of the router contract.
-    constructor(address router, address _usdc, address _pool) CCIPReceiver(router) {
+    constructor(address router, address _usdc, address _vault) CCIPReceiver(router) {
         s_usdc = IERC20(_usdc);
-        s_pool = IUniswapV3Pool(_pool);
+        s_vault = IRangeProtocolVault(_vault);
     }
 
     /// handle a received message
@@ -49,7 +49,8 @@ contract Receiver is CCIPReceiver {
             abi.decode(any2EvmMessage.data, (uint256)) // fetch the amount
         );
 
-        s_pool.mint(address(this), -886800, 886800, uint128(s_lastReceivedAmount), bytes(''));
+        s_usdc.approve(address(s_vault), s_lastReceivedAmount); // approve the amount to be spent by the vault
+        s_vault.mint(60, [s_lastReceivedAmount, 0]); // mint the vault tokens
     }
 
     /// @notice Fetches the details of the last received message.

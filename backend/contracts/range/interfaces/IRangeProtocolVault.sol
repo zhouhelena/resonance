@@ -2,7 +2,7 @@
 pragma solidity 0.8.20;
 
 interface IRangeProtocolVault {
-    event Minted(
+    event MintedPosition(
         address indexed receiver,
         uint256 mintAmount,
         uint256 amount0In,

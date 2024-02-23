@@ -199,7 +199,7 @@ const _abi = [
         type: "uint256",
       },
     ],
-    name: "Minted",
+    name: "MintedPosition",
     type: "event",
   },
   {
