@@ -4,7 +4,7 @@ version = '1.0.0'
 upgrade_policy = "immutable"
 
 [addresses]
-liquidswap_lp = "4d0e1c9969de6ff8d7d7518609bc207d7039d01dfd53cb9503d9de85683b1dce"
+liquidswap_lp = "0xe9d8eecaf7511cbd8c2759ae92504c0207c367be0bd1f9dd13b6a2afd45d0ef0"
 
 [dev-dependencies.MoveStdlib]
 git = "https://github.com/aptos-labs/aptos-core.git"

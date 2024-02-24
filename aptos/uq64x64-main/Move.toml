@@ -1,0 +1,13 @@
+[package]
+name = "UQ64x64"
+version = "0.3.8"
+upgrade_policy = "immutable"
+
+[addresses]
+uq64x64 = "42f50b4ebbc56c902e91ef8de40cf191dc69fe9ada6cf4bb4ae6466a11486d7f"
+
+[dev-dependencies.MoveStdlib]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "main"
+subdir = "aptos-move/framework/move-stdlib"
+addr_subst = { std = "0x1" }

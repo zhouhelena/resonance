@@ -1,0 +1,11 @@
+[package]
+name = "PBCTestTokens"
+version = "0.0.0"
+
+[addresses]
+PBCTestTokens = "0xd3eb2c2e03749a29b1e3a62773e4f1de8a8563f01765bb813ca70b278dce83a0"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"

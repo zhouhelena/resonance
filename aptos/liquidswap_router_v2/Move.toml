@@ -1,7 +1,10 @@
 [package]
 name = "LiquidswapRouterV2"
 version = "1.0.0"
-upgrade_policy = "immutable"
+upgrade_policy = "compatible"
+
+[addresses]
+liquidswap = "0xe9d8eecaf7511cbd8c2759ae92504c0207c367be0bd1f9dd13b6a2afd45d0ef0"
 
 [dependencies.Liquidswap]
 local = ".."

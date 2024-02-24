@@ -8,6 +8,9 @@ dependencies:
   '@aptos-labs/ts-sdk':
     specifier: ^1.7.0
     version: 1.7.0
+  '@axelar-network/axelar-gmp-sdk-solidity':
+    specifier: ^5.6.4
+    version: 5.6.4
   '@chainlink/contracts':
     specifier: ^0.8.0
     version: 0.8.0(ethers@6.11.1)
@@ -132,6 +135,11 @@ packages:
       '@openzeppelin/upgrades-core': 1.32.5
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@axelar-network/axelar-gmp-sdk-solidity@5.6.4:
+    resolution: {integrity: sha512-PQjV+HeJynmSRMhyM3SexwnbFNruSaiRUeNCWjV8/7CkdPsDqypoqIXVRVU8Zk92DUUHeqZZzL/3qP2LYuvlnA==}
+    engines: {node: '>=16'}
     dev: false
 
   /@chainlink/contracts-ccip@1.4.0(ethers@6.11.1):
