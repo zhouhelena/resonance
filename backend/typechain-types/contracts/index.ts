@@ -11,3 +11,4 @@ import type * as tokens from "./tokens";
 export type { tokens };
 import type * as uniswap from "./uniswap";
 export type { uniswap };
+export type { Router } from "./Router";

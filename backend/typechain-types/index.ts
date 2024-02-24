@@ -116,6 +116,8 @@ export type { RangeProtocolVault } from "./contracts/range/RangeProtocolVault";
 export { RangeProtocolVault__factory } from "./factories/contracts/range/RangeProtocolVault__factory";
 export type { RangeProtocolVaultStorage } from "./contracts/range/RangeProtocolVaultStorage";
 export { RangeProtocolVaultStorage__factory } from "./factories/contracts/range/RangeProtocolVaultStorage__factory";
+export type { Router } from "./contracts/Router";
+export { Router__factory } from "./factories/contracts/Router__factory";
 export type { CustomToken } from "./contracts/tokens/CustomToken";
 export { CustomToken__factory } from "./factories/contracts/tokens/CustomToken__factory";
 export type { IUniswapV3FlashCallback } from "./contracts/uniswap/interfaces/callback/IUniswapV3FlashCallback";

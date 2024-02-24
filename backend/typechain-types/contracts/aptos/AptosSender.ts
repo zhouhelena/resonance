@@ -29,6 +29,7 @@ export interface AptosSenderInterface extends Interface {
       | "executeWithToken"
       | "gateway"
       | "releaseTokens"
+      | "sendTokens"
       | "sourceAddress"
       | "sourceChain"
       | "value"
@@ -50,6 +51,10 @@ export interface AptosSenderInterface extends Interface {
     values: [string, string, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "sendTokens",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "sourceAddress",
     values?: undefined
   ): string;
@@ -69,6 +74,7 @@ export interface AptosSenderInterface extends Interface {
     functionFragment: "releaseTokens",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "sendTokens", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "sourceAddress",
     data: BytesLike
@@ -169,6 +175,8 @@ export interface AptosSender extends BaseContract {
     "payable"
   >;
 
+  sendTokens: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+
   sourceAddress: TypedContractMethod<[], [string], "view">;
 
   sourceChain: TypedContractMethod<[], [string], "view">;
@@ -219,6 +227,9 @@ export interface AptosSender extends BaseContract {
     [void],
     "payable"
   >;
+  getFunction(
+    nameOrSignature: "sendTokens"
+  ): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "sourceAddress"
   ): TypedContractMethod<[], [string], "view">;

@@ -14,7 +14,7 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
  */
 
 /// @title - A simple contract for sending string data across chains.
-contract Sender is OwnerIsCreator {
+contract Sender {
     // Custom errors to provide more descriptive revert messages.
     error NotEnoughBalance(uint256 currentBalance, uint256 calculatedFees); // Used to make sure contract has enough balance.
 
@@ -53,7 +53,7 @@ contract Sender is OwnerIsCreator {
         uint64 destinationChainSelector,
         address receiver,
         uint256 amount
-    ) external onlyOwner returns (bytes32 messageId) {
+    ) external returns (bytes32 messageId) {
         // Create an EVM2AnyMessage struct in memory with necessary information for sending a cross-chain message
         Client.EVM2AnyMessage memory evm2AnyMessage = Client.EVM2AnyMessage({
             receiver: abi.encode(receiver), // ABI-encoded receiver address
@@ -61,7 +61,7 @@ contract Sender is OwnerIsCreator {
             tokenAmounts: new Client.EVMTokenAmount[](0), // Empty array indicating no tokens are being sent
             extraArgs: Client._argsToBytes(
                 // Additional arguments, setting gas limit
-                Client.EVMExtraArgsV1({gasLimit: 200_000})
+                Client.EVMExtraArgsV1({gasLimit: 1_000_000})
             ),
             // Set the feeToken  address, indicating LINK will be used for fees
             feeToken: address(s_linkToken)

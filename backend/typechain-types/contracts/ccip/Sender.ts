@@ -24,71 +24,16 @@ import type {
 } from "../../common";
 
 export interface SenderInterface extends Interface {
-  getFunction(
-    nameOrSignature:
-      | "acceptOwnership"
-      | "owner"
-      | "sendTokens"
-      | "transferOwnership"
-  ): FunctionFragment;
+  getFunction(nameOrSignature: "sendTokens"): FunctionFragment;
 
-  getEvent(
-    nameOrSignatureOrTopic:
-      | "OwnershipTransferRequested"
-      | "OwnershipTransferred"
-      | "TokensSent"
-  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TokensSent"): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "acceptOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "sendTokens",
     values: [BigNumberish, AddressLike, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
 
-  decodeFunctionResult(
-    functionFragment: "acceptOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "sendTokens", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
-}
-
-export namespace OwnershipTransferRequestedEvent {
-  export type InputTuple = [from: AddressLike, to: AddressLike];
-  export type OutputTuple = [from: string, to: string];
-  export interface OutputObject {
-    from: string;
-    to: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace OwnershipTransferredEvent {
-  export type InputTuple = [from: AddressLike, to: AddressLike];
-  export type OutputTuple = [from: string, to: string];
-  export interface OutputObject {
-    from: string;
-    to: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export namespace TokensSentEvent {
@@ -165,10 +110,6 @@ export interface Sender extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
-  acceptOwnership: TypedContractMethod<[], [void], "nonpayable">;
-
-  owner: TypedContractMethod<[], [string], "view">;
-
   sendTokens: TypedContractMethod<
     [
       destinationChainSelector: BigNumberish,
@@ -179,22 +120,10 @@ export interface Sender extends BaseContract {
     "nonpayable"
   >;
 
-  transferOwnership: TypedContractMethod<
-    [to: AddressLike],
-    [void],
-    "nonpayable"
-  >;
-
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
 
-  getFunction(
-    nameOrSignature: "acceptOwnership"
-  ): TypedContractMethod<[], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "owner"
-  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "sendTokens"
   ): TypedContractMethod<
@@ -206,24 +135,7 @@ export interface Sender extends BaseContract {
     [string],
     "nonpayable"
   >;
-  getFunction(
-    nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[to: AddressLike], [void], "nonpayable">;
 
-  getEvent(
-    key: "OwnershipTransferRequested"
-  ): TypedContractEvent<
-    OwnershipTransferRequestedEvent.InputTuple,
-    OwnershipTransferRequestedEvent.OutputTuple,
-    OwnershipTransferRequestedEvent.OutputObject
-  >;
-  getEvent(
-    key: "OwnershipTransferred"
-  ): TypedContractEvent<
-    OwnershipTransferredEvent.InputTuple,
-    OwnershipTransferredEvent.OutputTuple,
-    OwnershipTransferredEvent.OutputObject
-  >;
   getEvent(
     key: "TokensSent"
   ): TypedContractEvent<
@@ -233,28 +145,6 @@ export interface Sender extends BaseContract {
   >;
 
   filters: {
-    "OwnershipTransferRequested(address,address)": TypedContractEvent<
-      OwnershipTransferRequestedEvent.InputTuple,
-      OwnershipTransferRequestedEvent.OutputTuple,
-      OwnershipTransferRequestedEvent.OutputObject
-    >;
-    OwnershipTransferRequested: TypedContractEvent<
-      OwnershipTransferRequestedEvent.InputTuple,
-      OwnershipTransferRequestedEvent.OutputTuple,
-      OwnershipTransferRequestedEvent.OutputObject
-    >;
-
-    "OwnershipTransferred(address,address)": TypedContractEvent<
-      OwnershipTransferredEvent.InputTuple,
-      OwnershipTransferredEvent.OutputTuple,
-      OwnershipTransferredEvent.OutputObject
-    >;
-    OwnershipTransferred: TypedContractEvent<
-      OwnershipTransferredEvent.InputTuple,
-      OwnershipTransferredEvent.OutputTuple,
-      OwnershipTransferredEvent.OutputObject
-    >;
-
     "TokensSent(bytes32,uint64,address,uint256,address,uint256)": TypedContractEvent<
       TokensSentEvent.InputTuple,
       TokensSentEvent.OutputTuple,

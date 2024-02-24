@@ -6,3 +6,4 @@ export * as ccip from "./ccip";
 export * as range from "./range";
 export * as tokens from "./tokens";
 export * as uniswap from "./uniswap";
+export { Router__factory } from "./Router__factory";
