@@ -65,7 +65,7 @@ export default function ChartPage() {
             p="0.5rem"
             bg="white"
             width="1200px"
-            height="650px"
+            height="670px"
             borderRadius="1.37rem"
           >
             <Text
@@ -81,6 +81,7 @@ export default function ChartPage() {
           </Box>
         </Flex>
       </Box>
+      <footer></footer>
       <style jsx>{`
         main {
           flex: 1;

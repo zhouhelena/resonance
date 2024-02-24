@@ -30,14 +30,18 @@ export default function Header() {
           >
             {/* Logo on the left
         <Image boxSize="1.56rem" src={logo} alt="Uniswap Logo" /> */}
-
             <NextLink href="/" passHref>
               <Link mr="4" _hover={{ textDecoration: "underline" }}>
-                Invest
+                Logo Image Here
               </Link>
             </NextLink>
 
             <Flex align="center">
+              <NextLink href="/" passHref>
+                <Link mr="4" _hover={{ textDecoration: "underline" }}>
+                  Invest
+                </Link>
+              </NextLink>
               <NextLink href="/chart" passHref>
                 <Link mr="4" _hover={{ textDecoration: "underline" }}>
                   Chart
