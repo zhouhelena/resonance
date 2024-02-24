@@ -23,7 +23,7 @@ Our transaction process starts with the user hitting "Invest" on the frontend. T
 - For Aptos, we use Axelar Intents to bridge the funds to Aptos, then create a liquidity position in a LiquidSwap pool (forked).
 
 
-dApp Themes: Multi-chain, DeFi
+dApp Theme: DeFi
 
 What sponsor bounty you're applying to? (Note: Can me multiple)
 
