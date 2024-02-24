@@ -24,6 +24,7 @@ import { abi } from "../abi";
 
 export default function Main() {
   const [ethValue, setEthValue] = useState("");
+  const [nearValue, setNearValue] = useState("");
   const [polygonValue, setPolygonValue] = useState("");
   const [aptosValue, setAptosValue] = useState("");
   const [arbitrumValue, setArbitrumValue] = useState("");
@@ -33,9 +34,9 @@ export default function Main() {
 
   const tabSliderValues = [
     {}, // Custom
-    { ethereum: 70, polygon: 10, aptos: 10, arbitrum: 10 }, // Safe
-    { ethereum: 10, polygon: 10, aptos: 70, arbitrum: 10 }, // Aggressive
-    { ethereum: 10, polygon: 10, aptos: 10, arbitrum: 70 }, // Sustainable
+    { near: 10, ethereum: 60, polygon: 10, aptos: 10, arbitrum: 10 }, // Safe
+    { near: 10, ethereum: 10, polygon: 10, aptos: 60, arbitrum: 10 }, // Aggressive
+    { near: 75, ethereum: 0, polygon: 0, aptos: 25, arbitrum: 0 }, // Sustainable
   ];
   const [sliderValues, setSliderValues] = useState(tabSliderValues[0]);
 
@@ -48,6 +49,7 @@ export default function Main() {
     let investmentValues;
     if (tabIndex !== 0) {
       investmentValues = {
+        near: (sliderValues["near"] / 100) * totalValue,
         ethereum: (sliderValues["ethereum"] / 100) * totalValue,
         polygon: (sliderValues["polygon"] / 100) * totalValue,
         aptos: (sliderValues["aptos"] / 100) * totalValue,
@@ -57,6 +59,7 @@ export default function Main() {
 
     if (tabIndex == 0) {
       investmentValues = {
+        near: nearValue,
         ethereum: ethValue,
         polygon: polygonValue,
         aptos: aptosValue,
@@ -85,6 +88,7 @@ export default function Main() {
   }, [hash, router]);
 
   const totalSum =
+    Number(nearValue) +
     Number(ethValue) +
     Number(polygonValue) +
     Number(aptosValue) +
@@ -97,7 +101,7 @@ export default function Main() {
 
   const handleSliderChange = (coin, value) => {
     const totalOtherCoins = 100 - value;
-    const numOtherCoins = 3;
+    const numOtherCoins = 4;
     const otherCoinValue = totalOtherCoins / numOtherCoins;
 
     setSliderValues((prevValues) => ({
@@ -107,6 +111,7 @@ export default function Main() {
       ...(coin !== "polygon" && { polygon: otherCoinValue }),
       ...(coin !== "aptos" && { aptos: otherCoinValue }),
       ...(coin !== "arbitrum" && { arbitrum: otherCoinValue }),
+      ...(coin !== "near" && { near: otherCoinValue }),
     }));
   };
 
@@ -155,7 +160,7 @@ export default function Main() {
     <ChakraProvider>
       <div>
         <Head>
-          <title>LP App</title>
+          <title>Resonance</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Header />
@@ -274,67 +279,7 @@ export default function Main() {
                           borderRadius="1.12rem"
                           boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
                         >
-                          Ethereum
-                        </Button>
-                      </Box>
-                      <Flex
-                        alignItems="center"
-                        justifyContent="center"
-                        bg="white"
-                        p="0.18rem"
-                        borderRadius="0.75rem"
-                        pos="relative"
-                        top="-2.37rem"
-                        left="2.5rem"
-                      >
-                        <ArrowDownIcon
-                          bg="rgb(247, 248, 250)"
-                          color="rgb(128,128,128)"
-                          h="1.5rem"
-                          width="1.62rem"
-                          borderRadius="0.75rem"
-                        />
-                      </Flex>
-                      <Box>
-                        <Input
-                          placeholder="0.0"
-                          fontSize="1.5rem"
-                          width="100%"
-                          size="19rem"
-                          textAlign="right"
-                          bg="rgb(247, 248, 250)"
-                          outline="none"
-                          border="none"
-                          _focus={{
-                            outline: "none",
-                            boxShadow: "none",
-                          }}
-                          value={ethValue}
-                          onChange={(e) => setEthValue(e.target.value)}
-                          type="number"
-                        />
-                      </Box>
-                    </Flex>
-
-                    <Flex
-                      alignItems="center"
-                      justifyContent="space-between"
-                      bg="rgb(247, 248, 250)"
-                      pos="relative"
-                      p="1rem 1rem 1.7rem"
-                      borderRadius="1.25rem"
-                      mt="0.25rem"
-                      border="0.06rem solid rgb(237, 238, 242)"
-                    >
-                      <Box>
-                        <Button
-                          bg="rgb(232, 0, 111)"
-                          color="white"
-                          p="0rem 1rem"
-                          borderRadius="1.12rem"
-                          boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
-                        >
-                          Polygon
+                          Near
                         </Button>
                       </Box>
                       <Box>
@@ -351,8 +296,8 @@ export default function Main() {
                             outline: "none",
                             boxShadow: "none",
                           }}
-                          value={polygonValue}
-                          onChange={(e) => setPolygonValue(e.target.value)}
+                          value={nearValue}
+                          onChange={(e) => setNearValue(e.target.value)}
                           type="number"
                         />
                       </Box>
@@ -441,6 +386,91 @@ export default function Main() {
                         />
                       </Box>
                     </Flex>
+
+                    <Flex
+                      alignItems="center"
+                      justifyContent="space-between"
+                      bg="rgb(247, 248, 250)"
+                      pos="relative"
+                      p="1rem 1rem 1.7rem"
+                      borderRadius="1.25rem"
+                      mt="0.25rem"
+                      border="0.06rem solid rgb(237, 238, 242)"
+                    >
+                      <Box>
+                        <Button
+                          bg="rgb(232, 0, 111)"
+                          color="white"
+                          p="0rem 1rem"
+                          borderRadius="1.12rem"
+                          boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                        >
+                          Ethereum
+                        </Button>
+                      </Box>
+
+                      <Box>
+                        <Input
+                          placeholder="0.0"
+                          fontSize="1.5rem"
+                          width="100%"
+                          size="19rem"
+                          textAlign="right"
+                          bg="rgb(247, 248, 250)"
+                          outline="none"
+                          border="none"
+                          _focus={{
+                            outline: "none",
+                            boxShadow: "none",
+                          }}
+                          value={ethValue}
+                          onChange={(e) => setEthValue(e.target.value)}
+                          type="number"
+                        />
+                      </Box>
+                    </Flex>
+
+                    <Flex
+                      alignItems="center"
+                      justifyContent="space-between"
+                      bg="rgb(247, 248, 250)"
+                      pos="relative"
+                      p="1rem 1rem 1.7rem"
+                      borderRadius="1.25rem"
+                      mt="0.25rem"
+                      border="0.06rem solid rgb(237, 238, 242)"
+                    >
+                      <Box>
+                        <Button
+                          bg="rgb(232, 0, 111)"
+                          color="white"
+                          p="0rem 1rem"
+                          borderRadius="1.12rem"
+                          boxShadow="rgb(0 0 0 / 8%) 0rem 5.25rem 0.62rem"
+                        >
+                          Polygon
+                        </Button>
+                      </Box>
+                      <Box>
+                        <Input
+                          placeholder="0.0"
+                          fontSize="1.5rem"
+                          width="100%"
+                          size="19rem"
+                          textAlign="right"
+                          bg="rgb(247, 248, 250)"
+                          outline="none"
+                          border="none"
+                          _focus={{
+                            outline: "none",
+                            boxShadow: "none",
+                          }}
+                          value={polygonValue}
+                          onChange={(e) => setPolygonValue(e.target.value)}
+                          type="number"
+                        />
+                      </Box>
+                    </Flex>
                   </TabPanel>
                   <TabPanel>
                     {/* Tab 2 */}
@@ -510,10 +540,11 @@ export default function Main() {
                         border="0.06rem solid rgb(237, 238, 242)"
                       >
                         <Box w="full">
-                          {renderSlider("ethereum", "Ethereum")}
-                          {renderSlider("polygon", "Polygon")}
+                          {renderSlider("near", "Near")}
                           {renderSlider("aptos", "Aptos")}
                           {renderSlider("arbitrum", "Arbitrum")}
+                          {renderSlider("ethereum", "Ethereum")}
+                          {renderSlider("polygon", "Polygon")}
                         </Box>
                       </Flex>
                     </p>
@@ -586,10 +617,11 @@ export default function Main() {
                         border="0.06rem solid rgb(237, 238, 242)"
                       >
                         <Box w="full">
-                          {renderSlider("ethereum", "Ethereum")}
-                          {renderSlider("polygon", "Polygon")}
+                          {renderSlider("near", "Near")}
                           {renderSlider("aptos", "Aptos")}
                           {renderSlider("arbitrum", "Arbitrum")}
+                          {renderSlider("ethereum", "Ethereum")}
+                          {renderSlider("polygon", "Polygon")}
                         </Box>
                       </Flex>
                     </p>
@@ -662,10 +694,11 @@ export default function Main() {
                         border="0.06rem solid rgb(237, 238, 242)"
                       >
                         <Box w="full">
-                          {renderSlider("ethereum", "Ethereum")}
-                          {renderSlider("polygon", "Polygon")}
+                          {renderSlider("near", "Near")}
                           {renderSlider("aptos", "Aptos")}
                           {renderSlider("arbitrum", "Arbitrum")}
+                          {renderSlider("ethereum", "Ethereum")}
+                          {renderSlider("polygon", "Polygon")}
                         </Box>
                       </Flex>
                     </p>
