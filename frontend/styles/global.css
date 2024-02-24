@@ -13,3 +13,7 @@
 body {
   background: rgb(243, 234, 241) !important;
 }
+
+nextjs-portal {
+  display: none;
+}

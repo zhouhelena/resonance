@@ -35,8 +35,8 @@ export default function Main() {
   // SET INVESTMENT STRATEGIES FOR SLIDERS HERE:
   const tabSliderValues = [
     {}, // Custom
-    { near: 10, ethereum: 60, polygon: 10, aptos: 10, arbitrum: 10 }, // Safe
-    { near: 10, ethereum: 10, polygon: 10, aptos: 60, arbitrum: 10 }, // Smart
+    { near: 10, ethereum: 50, polygon: 10, aptos: 10, arbitrum: 20 }, // Safe
+    { near: 30, ethereum: 0, polygon: 5, aptos: 60, arbitrum: 5 }, // Smart
     { near: 75, ethereum: 0, polygon: 0, aptos: 25, arbitrum: 0 }, // Sustainable
   ];
 
@@ -72,12 +72,15 @@ export default function Main() {
     console.log(investmentValues["ethereum"]);
 
     writeContract({
-      address: "0x2BfbA4a7c501F2a8CF9161f99B2393E8B42c99d4",
+      address: "0x8f9ae8E2B3Dfc846cc8be0981877e3ccF15d4F3D",
       abi,
-      functionName: "approve",
+      functionName: "deployCapital",
       args: [
-        "0x03B2C8DB7dE4663152dBD384318eB37dF3E94C91",
-        BigInt(investmentValues["ethereum"]),
+        String(investmentValues["ethereum"]),
+        String(investmentValues["arbitrum"]),
+        String(investmentValues["polygon"]),
+        String(investmentValues["aptos"]),
+        String(0),
       ],
     });
   };

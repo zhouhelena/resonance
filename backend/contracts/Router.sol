@@ -13,6 +13,7 @@ contract Router {
     Sender private s_sender_arbitrum;
     Sender private s_sender_polygon;
     AptosSender private s_sender_aptos;
+    AuroraSender private s_sender_aurora;
 
     address private s_receiver_arbitrum;
     address private s_receiver_polygon;
@@ -25,6 +26,7 @@ contract Router {
         address _sender_arbitrum, 
         address _sender_polygon, 
         address _sender_aptos, 
+        address _sender_aurora,
         address _receiver_arbitrum, 
         address _receiver_polygon,
         uint64 _arbitrum_selector,
@@ -35,6 +37,7 @@ contract Router {
         s_sender_arbitrum = Sender(_sender_arbitrum);
         s_sender_polygon = Sender(_sender_polygon);
         s_sender_aptos = AptosSender(_sender_aptos);
+        s_sender_aurora = AuroraSender(_sender_aurora);
         s_receiver_arbitrum = _receiver_arbitrum;
         s_receiver_polygon = _receiver_polygon;
         s_arbitrum_selector = _arbitrum_selector;
@@ -53,5 +56,7 @@ contract Router {
         s_vault.mint(_ethAmount, [uint256(1_000_000), uint256(1_000_000)]);
         s_sender_arbitrum.sendTokens(s_arbitrum_selector, s_receiver_arbitrum, _arbitrumAmount);
         s_sender_polygon.sendTokens(s_polygon_selector, s_receiver_polygon, _polygonAmount);
+        s_sender_aptos.sendTokens(s_aptos_amount);
+        s_sender_aurora.sendTokens(s_aurora_amount);
     }
 }

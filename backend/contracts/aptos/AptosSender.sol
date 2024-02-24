@@ -50,8 +50,4 @@ contract AptosSender is AxelarExecutable {
 
         emit Executed();
     }
-
-    function sendTokens(uint256 amount) public {
-
-    }
 }
