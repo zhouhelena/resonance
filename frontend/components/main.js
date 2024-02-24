@@ -32,12 +32,14 @@ export default function Main() {
   const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  // SET INVESTMENT STRATEGIES FOR SLIDERS HERE:
   const tabSliderValues = [
     {}, // Custom
     { near: 10, ethereum: 60, polygon: 10, aptos: 10, arbitrum: 10 }, // Safe
-    { near: 10, ethereum: 10, polygon: 10, aptos: 60, arbitrum: 10 }, // Aggressive
+    { near: 10, ethereum: 10, polygon: 10, aptos: 60, arbitrum: 10 }, // Smart
     { near: 75, ethereum: 0, polygon: 0, aptos: 25, arbitrum: 0 }, // Sustainable
   ];
+
   const [sliderValues, setSliderValues] = useState(tabSliderValues[0]);
 
   const router = useRouter();
@@ -200,7 +202,7 @@ export default function Main() {
                 <TabList justifyContent="center" pb="4">
                   <Tab>Custom</Tab>
                   <Tab>Safe</Tab>
-                  <Tab>Aggressive</Tab>
+                  <Tab>Smart</Tab>
                   <Tab>Sustainable</Tab>
                 </TabList>
                 <TabPanels>
