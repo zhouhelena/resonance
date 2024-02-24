@@ -1,11 +1,13 @@
 import { ReactNode } from "react";
-import { Flex, Box, Button, Text, Image, Link } from "@chakra-ui/react";
+import { Flex, Box, Button, Text, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider, useAccount } from "wagmi";
 import { config } from "../config";
 import { Account } from "../account";
 import { WalletOptions } from "../wallet-options";
+import logo from "../logo.png";
+import Image from "next/image";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +21,7 @@ export default function Header() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <Box as="nav">
+        <Box as="nav" height="60px">
           <Flex
             align="center"
             justify="space-between"
@@ -28,13 +30,7 @@ export default function Header() {
             mt="1.5rem"
             px="4"
           >
-            {/* Logo on the left
-        <Image boxSize="1.56rem" src={logo} alt="Uniswap Logo" /> */}
-            <NextLink href="/" passHref>
-              <Link mr="4" _hover={{ textDecoration: "underline" }}>
-                Logo Image Here
-              </Link>
-            </NextLink>
+            <Image height={70} src={logo} alt="Resonance Logo" />
 
             <Flex align="center">
               <NextLink href="/" passHref>

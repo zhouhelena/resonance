@@ -59,7 +59,7 @@ export default function ChartPage() {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          mt={5}
+          mt={10}
         >
           <Box
             p="0.5rem"
@@ -114,11 +114,27 @@ function createChart(poolData, ctx) {
         {
           label: "Total Value Locked (USD)",
           data: poolData.map((pool) => Number(pool.totalValueLockedUSD)),
-          fill: false,
-          borderColor: "rgb(75, 192, 192)",
-          tension: 0.1,
+          backgroundColor: "rgba(54, 162, 235, 0.5)",
+          borderColor: "rgba(54, 162, 235, 1)",
+          borderWidth: 1,
         },
       ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: "#123456",
+          },
+        },
+        x: {
+          ticks: {
+            color: "#123456",
+          },
+        },
+      },
+      responsive: true,
     },
   });
 }

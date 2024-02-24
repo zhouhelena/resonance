@@ -20,9 +20,13 @@ export function Account() {
                   : `${address.slice(0, 6)}...${address.slice(-4)}`}
               </div>
             )}
-          </Flex>
-          <Flex alignItems="center" justifyContent="center" p="1rem 0rem 0rem">
-            <Button onClick={() => disconnect()}>Disconnect</Button>
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              p="0rem 0rem 0rem 1rem"
+            >
+              <Button onClick={() => disconnect()}>Disconnect</Button>
+            </Flex>
           </Flex>
         </Box>
       </Box>
