@@ -46,6 +46,11 @@ const config: HardhatUserConfig = {
       chainId: 80001,
       url: `https://polygon-mumbai.g.alchemy.com/v2/${ALCHEMY_MUMBAI_KEY}`,
       accounts: [EVM_PRIVATE_KEY],
+    },
+    aurora: {
+      chainId: 1313161555,
+      url: "https://testnet.aurora.dev",
+      accounts: [EVM_PRIVATE_KEY],
     }
   }
 };

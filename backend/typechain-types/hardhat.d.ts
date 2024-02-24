@@ -14,6 +14,42 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "AxelarExecutable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AxelarExecutable__factory>;
+    getContractFactory(
+      name: "IAxelarExecutable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IAxelarExecutable__factory>;
+    getContractFactory(
+      name: "IAxelarGasService",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IAxelarGasService__factory>;
+    getContractFactory(
+      name: "IAxelarGateway",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IAxelarGateway__factory>;
+    getContractFactory(
+      name: "IContractIdentifier",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IContractIdentifier__factory>;
+    getContractFactory(
+      name: "IGovernable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IGovernable__factory>;
+    getContractFactory(
+      name: "IImplementation",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IImplementation__factory>;
+    getContractFactory(
+      name: "IOwnable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IOwnable__factory>;
+    getContractFactory(
+      name: "IUpgradable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IUpgradable__factory>;
+    getContractFactory(
       name: "CCIPReceiver",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CCIPReceiver__factory>;
@@ -149,6 +185,10 @@ declare module "hardhat/types/runtime" {
       name: "IUniswapV3PoolState",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IUniswapV3PoolState__factory>;
+    getContractFactory(
+      name: "AptosSender",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AptosSender__factory>;
     getContractFactory(
       name: "LinkTokenInterface",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -379,6 +419,51 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.UniswapV3PoolDeployer__factory>;
 
     getContractAt(
+      name: "AxelarExecutable",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AxelarExecutable>;
+    getContractAt(
+      name: "IAxelarExecutable",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAxelarExecutable>;
+    getContractAt(
+      name: "IAxelarGasService",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAxelarGasService>;
+    getContractAt(
+      name: "IAxelarGateway",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAxelarGateway>;
+    getContractAt(
+      name: "IContractIdentifier",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IContractIdentifier>;
+    getContractAt(
+      name: "IGovernable",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IGovernable>;
+    getContractAt(
+      name: "IImplementation",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IImplementation>;
+    getContractAt(
+      name: "IOwnable",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IOwnable>;
+    getContractAt(
+      name: "IUpgradable",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IUpgradable>;
+    getContractAt(
       name: "CCIPReceiver",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -548,6 +633,11 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.IUniswapV3PoolState>;
+    getContractAt(
+      name: "AptosSender",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AptosSender>;
     getContractAt(
       name: "LinkTokenInterface",
       address: string | ethers.Addressable,
@@ -835,6 +925,42 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.UniswapV3PoolDeployer>;
 
     deployContract(
+      name: "AxelarExecutable",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AxelarExecutable>;
+    deployContract(
+      name: "IAxelarExecutable",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IAxelarExecutable>;
+    deployContract(
+      name: "IAxelarGasService",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IAxelarGasService>;
+    deployContract(
+      name: "IAxelarGateway",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IAxelarGateway>;
+    deployContract(
+      name: "IContractIdentifier",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IContractIdentifier>;
+    deployContract(
+      name: "IGovernable",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IGovernable>;
+    deployContract(
+      name: "IImplementation",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IImplementation>;
+    deployContract(
+      name: "IOwnable",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IOwnable>;
+    deployContract(
+      name: "IUpgradable",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IUpgradable>;
+    deployContract(
       name: "CCIPReceiver",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.CCIPReceiver>;
@@ -970,6 +1096,10 @@ declare module "hardhat/types/runtime" {
       name: "IUniswapV3PoolState",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IUniswapV3PoolState>;
+    deployContract(
+      name: "AptosSender",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AptosSender>;
     deployContract(
       name: "LinkTokenInterface",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -1200,6 +1330,51 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.UniswapV3PoolDeployer>;
 
     deployContract(
+      name: "AxelarExecutable",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AxelarExecutable>;
+    deployContract(
+      name: "IAxelarExecutable",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IAxelarExecutable>;
+    deployContract(
+      name: "IAxelarGasService",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IAxelarGasService>;
+    deployContract(
+      name: "IAxelarGateway",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IAxelarGateway>;
+    deployContract(
+      name: "IContractIdentifier",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IContractIdentifier>;
+    deployContract(
+      name: "IGovernable",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IGovernable>;
+    deployContract(
+      name: "IImplementation",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IImplementation>;
+    deployContract(
+      name: "IOwnable",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IOwnable>;
+    deployContract(
+      name: "IUpgradable",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IUpgradable>;
+    deployContract(
       name: "CCIPReceiver",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -1369,6 +1544,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IUniswapV3PoolState>;
+    deployContract(
+      name: "AptosSender",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AptosSender>;
     deployContract(
       name: "LinkTokenInterface",
       args: any[],
